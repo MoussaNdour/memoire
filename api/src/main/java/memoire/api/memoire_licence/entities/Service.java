@@ -33,9 +33,9 @@ public class Service implements Serializable {
     @Column(name="description", length=254)
     private String     description ;
 
-    @Column(name="categorie", length=254)
-    private String     categorie ;
-
+    @OneToOne
+    @JoinColumn(name="idcategorie", referencedColumnName="idcategorie")
+    Categorie categorie;
 
 
 
@@ -68,17 +68,15 @@ public class Service implements Serializable {
         return this.description;
     }
 
-    public void setCategorie( String categorie ) {
-        this.categorie = categorie ;
-    }
-    public String getCategorie() {
-        return this.categorie;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
 
-
-
-	@Override
+    @Override
 	public String toString() { 
 		String separator = "|";
 		StringBuilder sb = new StringBuilder();
@@ -86,7 +84,6 @@ public class Service implements Serializable {
 		sb.append("idservice=").append(idservice);
 		sb.append(separator).append("nom=").append(nom);
 		sb.append(separator).append("description=").append(description);
-		sb.append(separator).append("categorie=").append(categorie);
 		sb.append("]");
 		return sb.toString();
 	}

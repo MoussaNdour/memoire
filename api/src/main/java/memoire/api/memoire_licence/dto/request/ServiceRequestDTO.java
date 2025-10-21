@@ -6,7 +6,7 @@ public class ServiceRequestDTO implements Serializable {
 
     private String nom;
     private String description;
-    private String categorie;
+    private int idcategorie;
 
     public String getNom() {
         return nom;
@@ -24,11 +24,11 @@ public class ServiceRequestDTO implements Serializable {
         this.description = description;
     }
 
-    public String getCategorie() {
-        return categorie;
+    public int getIdcategorie() {
+        return idcategorie;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
+    public void setIdcategorie(int idcategorie) {
+        this.idcategorie = idcategorie;
     }
 }

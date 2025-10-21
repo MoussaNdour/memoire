@@ -1,19 +1,10 @@
-package memoire.api.memoire_licence.entities;
+package memoire.api.memoire_licence.dto.response;
 
-import jakarta.persistence.*;
+public class CategorieResponseDTO {
 
-@Entity
-@Table(name="categorie")
-public class Categorie {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idcategorie")
     private int idcategorie;
 
-    @Column(name = "libelle")
     private String libelle;
-
 
     public int getIdcategorie() {
         return idcategorie;

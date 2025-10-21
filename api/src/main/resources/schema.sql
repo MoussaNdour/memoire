@@ -40,6 +40,10 @@ CREATE TABLE Utilisateur (
    actif                boolean default true,
    role     VARCHAR(30) not null -- Rôle: client, prestataire, admin
 );
+CREATE TABLE Categorie(
+    idcategorie SERIAL PRIMARY KEY,
+    libelle VARCHAR(254) NOT NULL
+);
 
 
 -- Catalogue des services proposés
@@ -47,12 +51,13 @@ CREATE TABLE Service (
    idservice            SERIAL PRIMARY KEY,
    nom                  VARCHAR(100) NOT NULL,     -- Nom du service
    description          TEXT,                      -- Description détaillée
-   categorie            VARCHAR(100) NOT NULL,     -- Catégorie du service
+   idcategorie          INT NOT NULL,              -- Catégorie du service
    tarif_horaire_min    DECIMAL(10,2),            -- Tarif minimum
    tarif_horaire_max    DECIMAL(10,2),            -- Tarif maximum
    duree_moyenne        INT,                      -- Durée moyenne en minutes
    actif                BOOLEAN DEFAULT TRUE,     -- Service actif ou non
-   date_creation        TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   date_creation        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   FOREIGN KEY (idcategorie) REFERENCES Categorie(idcategorie) ON DELETE CASCADE
 );
 
 -- Gestion des transactions financières
@@ -161,8 +166,7 @@ CREATE INDEX idx_demande_prestataire ON DemandeService(idprestataire);
 -- Index pour la table Evaluation
 CREATE INDEX idx_evaluation_note ON Evaluation(note);
 
--- Index pour la table Service
-CREATE INDEX idx_service_categorie ON Service(categorie);
+
 
 
 -- Index pour la table Prestataire

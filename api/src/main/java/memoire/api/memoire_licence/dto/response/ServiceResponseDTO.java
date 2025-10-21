@@ -19,7 +19,7 @@ public class ServiceResponseDTO implements Serializable {
     private int idservice;
     private String nom ;
     private String description ;
-    private String categorie ;
+    private String categorie;
 
 
     /**
@@ -60,6 +60,4 @@ public class ServiceResponseDTO implements Serializable {
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
-
-
 }
