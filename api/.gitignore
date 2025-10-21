@@ -1,5 +1,5 @@
 HELP.md
-target/
+
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -32,8 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
-src/main/resources/application.properties
+ ../.idea/
 
 .mvn/
 mvnw
 mvnw.cmd
+
+src/main/resources/application.properties
