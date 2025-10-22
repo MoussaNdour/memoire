@@ -10,6 +10,7 @@
 DROP TABLE IF EXISTS proposer;
 DROP TABLE IF EXISTS Evaluation;
 
+
 -- Supprimer les tables avec clés étrangères
 DROP TABLE IF EXISTS DemandeService;
 DROP TABLE IF EXISTS Administrateur;
@@ -21,6 +22,7 @@ DROP TABLE IF EXISTS Service;
 DROP TABLE IF EXISTS Contrat;
 DROP TABLE IF EXISTS Paiement;
 DROP TABLE IF EXISTS Utilisateur;
+DROP TABLE IF EXISTS Categorie;
 
 -- ==============================================================
 -- PHASE 2 : CRÉATION DES TABLES (ordre logique de dépendance)

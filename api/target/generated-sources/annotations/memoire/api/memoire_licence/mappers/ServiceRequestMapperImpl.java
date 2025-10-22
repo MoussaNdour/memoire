@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-21T13:40:47+0000",
+    date = "2025-10-22T17:05:14+0000",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -36,7 +36,9 @@ public class ServiceRequestMapperImpl implements ServiceRequestMapper {
 
         Categorie categorie = new Categorie();
 
-        categorie.setIdcategorie( serviceRequestDTO.getIdcategorie() );
+        if ( serviceRequestDTO.getIdcategorie() != null ) {
+            categorie.setIdcategorie( serviceRequestDTO.getIdcategorie() );
+        }
 
         return categorie;
     }

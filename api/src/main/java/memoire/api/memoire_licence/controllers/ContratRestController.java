@@ -2,6 +2,7 @@ package memoire.api.memoire_licence.controllers;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.ContratRequestDTO;
 import memoire.api.memoire_licence.services.classes.ContratService;
 import memoire.api.memoire_licence.dto.response.ContratResponseDTO;
@@ -35,7 +36,7 @@ public class ContratRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<ContratResponseDTO>> findAll() {
+	public ResponseEntity<List<ContratResponseDTO>> findAll() {
 		return ResponseEntity.ok(service.findAll());
     }
     
@@ -46,7 +47,7 @@ public class ContratRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{idcontrat}")
-    protected ResponseEntity<?> findById(@PathVariable int idcontrat) {
+    public ResponseEntity<?> findById(@PathVariable int idcontrat) {
 		ContratResponseDTO contrat=service.find(idcontrat);
 
 		if(contrat==null){
@@ -66,7 +67,7 @@ public class ContratRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<Void> create(@RequestBody ContratRequestDTO contratDTO) {
+	public ResponseEntity<Void> create(@Valid @RequestBody ContratRequestDTO contratDTO) {
 		service.save(contratDTO);
 		return ResponseEntity.ok().build();
 	}
@@ -79,7 +80,7 @@ public class ContratRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{idcontrat}")
-	protected ResponseEntity<Void> update(@PathVariable int idcontrat, @RequestBody ContratRequestDTO contratDTO) {
+	public ResponseEntity<Void> update(@PathVariable int idcontrat, @Valid @RequestBody ContratRequestDTO contratDTO) {
 		boolean test=service.update(idcontrat,contratDTO);
 
 		if(test)
@@ -99,7 +100,7 @@ public class ContratRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idcontrat}")
-	protected ResponseEntity<Void> deleteById(@PathVariable int idcontrat) {
+	public ResponseEntity<Void> deleteById(@PathVariable int idcontrat) {
 		service.delete(idcontrat);
 
 		return ResponseEntity.ok().build();

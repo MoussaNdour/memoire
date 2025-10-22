@@ -4,10 +4,15 @@
  */
 package memoire.api.memoire_licence.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.ServiceRequestDTO;
 import memoire.api.memoire_licence.dto.response.ServiceResponseDTO;
+import memoire.api.memoire_licence.entities.Categorie;
+import memoire.api.memoire_licence.repositories.CategorieRepository;
 import memoire.api.memoire_licence.services.classes.ServiceForServiceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +37,9 @@ public class ServiceRestController {
 
 	@Autowired
 	private ServiceForServiceEntity service ; // injected
+
+	@Autowired
+	private CategorieRepository categorieRepository;
     
 	/**
 	 * Get ALL
@@ -39,7 +47,7 @@ public class ServiceRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<ServiceResponseDTO>> findAll() {
+	public ResponseEntity<List<ServiceResponseDTO>> findAll() {
 		return ResponseEntity.ok(service.findAll());
     }
     
@@ -50,12 +58,15 @@ public class ServiceRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{idservice}")
-    protected ResponseEntity<?> findById(@PathVariable int idservice) {
+    public ResponseEntity<?> findById(@PathVariable int idservice) {
 		ServiceResponseDTO serviceDTO=service.findById(idservice);
 		if(serviceDTO!=null)
 			return ResponseEntity.ok(serviceDTO);
 		else{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service non trouve pour cet id");
+			Map<String,String> response=new HashMap<>();
+			response.put("erreur:","Service non trouve pour cet id");
+
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
     }
 
@@ -67,16 +78,42 @@ public class ServiceRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<?> create(@RequestBody ServiceRequestDTO serviceDTO) {
+	public ResponseEntity<?> create(@Valid @RequestBody ServiceRequestDTO serviceDTO) {
+		Categorie categorie=categorieRepository.findById(serviceDTO.getIdcategorie()).orElse(null);
+
+		Map<String,String> response=new HashMap<>();
+
+		if(categorie==null){
+			response.put("erreur","L'id du categorie est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+
 		service.create(serviceDTO);
-		return ResponseEntity.ok("Service cree avec succes");
+
+		response.put("message","Service cree avec succes");
+
+		return ResponseEntity.ok(response);
+
 	}
 
 
 	@PutMapping("/{idservice}")
-	protected ResponseEntity<?> update(@PathVariable int idservice, @RequestBody ServiceRequestDTO serviceDTO) {
+	public ResponseEntity<?> update(@PathVariable int idservice, @Valid @RequestBody ServiceRequestDTO serviceDTO) {
+		Categorie categorie=categorieRepository.findById(serviceDTO.getIdcategorie()).orElse(null);
+
+		Map<String,String> response=new HashMap<>();
+
+		if(categorie==null){
+			response.put("erreur","L'id du categorie est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+
 		service.update(idservice,serviceDTO);
-		return ResponseEntity.ok("Service mis a jour avec succes");
+
+		response.put("message","Service mis a jour avec succes");
+
+		return ResponseEntity.ok(response);
+
 	}
 
 
@@ -88,10 +125,13 @@ public class ServiceRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idservice}")
-	protected ResponseEntity<?> deleteById(@PathVariable int idservice) {
+	public ResponseEntity<?> deleteById(@PathVariable int idservice) {
 		service.delete(idservice);
 
-		return ResponseEntity.ok("Service supprimer avec succes");
+		Map<String,String> response=new HashMap<>();
+		response.put("message","Service supprimer avec succes");
+
+		return ResponseEntity.ok(response);
 	}
 
 }

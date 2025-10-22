@@ -1,6 +1,8 @@
 package memoire.api.memoire_licence.dto.request;
 
 
+import jakarta.validation.constraints.*;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,26 +16,36 @@ public class AdministrateurRequestDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotBlank(message = "Le nom de famille doit etre renseigner")
+    @Size(min=2,message="Le nom doit etre au moins 2 caracteres")
     private String nom ;
 
+    @NotBlank(message = "Le prenom doit etre renseigner")
+    @Size(min = 6,message="Le prenom doit etre au moins de 6 caracteres")
+    private String prenom;
 
-    private String prenom ;
-
-
+    @Min(value = 700000000,message = "Le numero de telephone est invalide")
+    @Digits(integer = 9,fraction = 0,message="Le numero de telephone est invalide")
     private Long telephone ;
 
-
+    @NotBlank(message = "Le mail doit être renseigné")
+    @Email(message = "email invalide")
     private String email ;
 
-
+    @NotBlank(message = "L'adresse doit etre renseigner")
+    @Size(min=6,message = "l'adresse doit etre au moins de 6 caracteres")
     private String adresse ;
 
-
+    @NotBlank(message = "Le mot de passe doit etre renseigner")
+    @Size(min=8,message = "Le mot doit etre au moins de 8 caracteres")
     private String motdepasse ;
 
-
+    @Min(value = 1000,message = "Le code doit etre superieur ou egal a 1000")
+    @Digits(integer = 4, fraction = 0,message = "Le code d'acces doit etre exactement 4 chiffres")
     private Integer codedaccess ;
 
+    @NotNull(message = "La date de naissance doit etre renseigner")
+    @Past(message = "La date de naissance doit etre dans le passe")
     private Date date_de_naissance;
 
 

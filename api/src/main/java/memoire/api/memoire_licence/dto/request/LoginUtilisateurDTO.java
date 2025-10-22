@@ -1,13 +1,16 @@
 package memoire.api.memoire_licence.dto.request;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class LoginUtilisateurDTO {
 
-    @NotNull
+    @NotBlank(message = "L'email doit etre renseigner")
+    @Email
     private String email;
 
-    @NotNull
+    @NotNull(message = "Le mot de passe doit etre renseigner")
     private String mot_de_passe;
 
     public String getEmail() {

@@ -1,26 +1,30 @@
 package memoire.api.memoire_licence.dto.request;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class RegisterUtilisateurDTO {
 
-    @NotNull(message="Le nom de l'utilisateur ne peux pas etre nul")
+    @NotBlank(message="Le nom de l'utilisateur ne peux pas etre nul")
+    @Size(min = 2,message = "Le nom doit au moins etre de 2 characteres")
     private String nom ;
 
-    @NotNull(message = "Le prenom de l'utilisateur ne peux pas etre nul")
+    @NotBlank(message = "Le prenom de l'utilisateur ne peux pas etre nul")
+    @Size(min = 6,message = "Le prenom doit au moins etre de 6 characteres")
     private String prenom ;
 
-    @NotNull(message ="Le numero de telephone de l'utilisateur ne peux pas etre nul")
+    @NotNull
+    @Digits(integer = 9,fraction = 0,message = "Le numero de telephone est invalide")
     private Long telephone ;
 
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Email invalide")
+    @NotBlank(message = "Le mail doit etre renseigner")
+    @Email(message = "Le mail est invalide")
     private String email ;
 
-    @NotNull(message = "L'adresse de l'utilisateur ne peux pas etre nul")
+    @NotBlank(message = "L'adresse de l'utilisateur ne peux pas etre nul")
+    @Size(min = 6,message = "L'adresse doit au moins etre de 6 characteres")
     private String adresse ;
 
+    @NotBlank(message = "Le mot de passe doit etre renseigner")
     @Size(min = 8,message = "Le mot de passe doit au moins etre de 8 characteres")
     private String motdepasse ;
 

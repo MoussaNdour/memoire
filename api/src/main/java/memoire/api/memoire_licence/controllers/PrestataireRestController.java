@@ -6,6 +6,7 @@ package memoire.api.memoire_licence.controllers;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.PrestataireRequestDTO;
 import memoire.api.memoire_licence.dto.response.PrestataireResponseDTO;
 import memoire.api.memoire_licence.services.interfaces.PrestataireServiceInterface;
@@ -39,7 +40,7 @@ public class PrestataireRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<PrestataireResponseDTO>> findAll() {
+	public ResponseEntity<List<PrestataireResponseDTO>> findAll() {
     	return ResponseEntity.ok(service.findAll());
     }
     
@@ -50,7 +51,7 @@ public class PrestataireRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{idprestataire}")
-    protected ResponseEntity<?> findById(@PathVariable int idprestataire) {
+    public ResponseEntity<?> findById(@PathVariable int idprestataire) {
 		PrestataireResponseDTO prestataire=service.findById(idprestataire);
 		if(prestataire==null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Il n'existe pas de prestataire avec cet id");
@@ -67,7 +68,7 @@ public class PrestataireRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<?> create(@RequestBody PrestataireRequestDTO prestataireDTO) {
+	public ResponseEntity<?> create(@Valid @RequestBody PrestataireRequestDTO prestataireDTO) {
 		boolean test=service.create(prestataireDTO);
 		if(test)
 			return ResponseEntity.ok("Prestataire creer avec succes");
@@ -83,7 +84,7 @@ public class PrestataireRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{idprestataire}")
-	protected ResponseEntity<?> update(@PathVariable int idprestataire, @RequestBody PrestataireRequestDTO prestataireDTO) {
+	public ResponseEntity<?> update(@PathVariable int idprestataire, @Valid @RequestBody PrestataireRequestDTO prestataireDTO) {
 		boolean test=service.update(idprestataire,prestataireDTO);
 		if(test)
 			return ResponseEntity.ok("Prestataire mis a jour avec succes");
@@ -98,7 +99,7 @@ public class PrestataireRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idprestataire}")
-	protected ResponseEntity<?> deleteById(@PathVariable int idprestataire) {
+	public ResponseEntity<?> deleteById(@PathVariable int idprestataire) {
 		service.deleteById(idprestataire);
 		return ResponseEntity.ok("Prestataire supprimer avec succes");
 	}

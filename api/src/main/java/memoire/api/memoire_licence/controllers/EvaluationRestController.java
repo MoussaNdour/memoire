@@ -42,7 +42,7 @@ public class EvaluationRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<EvaluationDTO>> findAll() {
+	public ResponseEntity<List<EvaluationDTO>> findAll() {
     	logger.debug("REST : GET - findAll");
     	List<EvaluationDTO> list = service.findAll();
     	return ResponseEntity.ok(list); // always 200
@@ -55,7 +55,7 @@ public class EvaluationRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{idevaluation}")
-    protected ResponseEntity<EvaluationDTO> findById(@PathVariable int idevaluation) {
+    public ResponseEntity<EvaluationDTO> findById(@PathVariable int idevaluation) {
     	logger.debug("REST : GET - findById");
     	EvaluationDTO evaluationDTO = service.findById(idevaluation);
 		if ( evaluationDTO != null ) {
@@ -74,7 +74,7 @@ public class EvaluationRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<Void> create(@RequestBody EvaluationDTO evaluationDTO) {
+	public ResponseEntity<Void> create(@RequestBody EvaluationDTO evaluationDTO) {
     	logger.debug("REST : POST - create");
 		if ( service.create(evaluationDTO) ) {
 			return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 created
@@ -92,7 +92,7 @@ public class EvaluationRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{idevaluation}")
-	protected ResponseEntity<Void> save(@PathVariable int idevaluation, @RequestBody EvaluationDTO evaluationDTO) {
+	public ResponseEntity<Void> save(@PathVariable int idevaluation, @RequestBody EvaluationDTO evaluationDTO) {
     	logger.debug("REST : PUT - save");
 		service.save(idevaluation, evaluationDTO);
 		return ResponseEntity.ok().build(); // OK, updated or created
@@ -105,7 +105,7 @@ public class EvaluationRestController {
 	 * @return 200 updated or 404 not found
 	 */
 	@PutMapping("")
-	protected ResponseEntity<Void> update(@RequestBody EvaluationDTO evaluationDTO) {
+	public ResponseEntity<Void> update(@RequestBody EvaluationDTO evaluationDTO) {
     	logger.debug("REST : PUT - update");
 		if ( service.update(evaluationDTO) ) {
 			return ResponseEntity.ok().build(); // 200 OK, found and updated
@@ -123,7 +123,7 @@ public class EvaluationRestController {
 	 * @return 200 updated or 404 not found
 	 */
 	@PatchMapping("/{idevaluation}")
-	protected ResponseEntity<Void> partialUpdate(@PathVariable int idevaluation, @RequestBody EvaluationDTO evaluationDTO) {
+	public ResponseEntity<Void> partialUpdate(@PathVariable int idevaluation, @RequestBody EvaluationDTO evaluationDTO) {
     	logger.debug("REST : PATCH - partialUpdate");
     	if ( service.partialUpdate(idevaluation, evaluationDTO) ) {
     		return ResponseEntity.ok().build(); // OK, found and updated
@@ -140,7 +140,7 @@ public class EvaluationRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idevaluation}")
-	protected ResponseEntity<Void> deleteById(@PathVariable int idevaluation) {
+	public ResponseEntity<Void> deleteById(@PathVariable int idevaluation) {
     	logger.debug("REST : DELETE - deleteById");
 		if ( service.deleteById(idevaluation) ) {
 			return ResponseEntity.noContent().build(); // 204 No content = "deleted"

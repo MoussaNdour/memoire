@@ -4,8 +4,11 @@
  */
 package memoire.api.memoire_licence.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.AdministrateurRequestDTO;
 import memoire.api.memoire_licence.dto.response.AdministrateurResponseDTO;
 import memoire.api.memoire_licence.services.classes.AdministrateurService;
@@ -34,13 +37,15 @@ public class AdministrateurRestController {
 	@Autowired
 	private AdministrateurService service ;
 
+	private Map<String,String> response=new HashMap();
+
 	/**
 	 * Get ALL
 	 *
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<AdministrateurResponseDTO>> findAll() {
+	public ResponseEntity<List<AdministrateurResponseDTO>> findAll() {
     	return ResponseEntity.ok(service.findAll());
     }
     
@@ -51,13 +56,14 @@ public class AdministrateurRestController {
      * @return 200 or 404
      */
     @GetMapping("/{idadmin}")
-    protected ResponseEntity<?> findById(@PathVariable int idadmin) {
+    public ResponseEntity<?> findById(@PathVariable int idadmin) {
     	AdministrateurResponseDTO admin=service.findById(idadmin);
 		if(admin!=null){
 			return ResponseEntity.ok(admin);
 		}
 		else{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Administrateur non trouve pour cet id");
+			response.put("erreur:","Administrateur non trouve pour cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
     }
 
@@ -69,13 +75,17 @@ public class AdministrateurRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<?> create(@RequestBody AdministrateurRequestDTO administrateurDTO) {
+	public ResponseEntity<?> create(@Valid @RequestBody AdministrateurRequestDTO administrateurDTO) {
     	boolean test=service.save(administrateurDTO);
 
 		if(test)
 			return ResponseEntity.ok("Admin cree avec succes");
 		else
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Il existe deja un utilisateur avec ce mail");
+		{
+			response.put("erreur:","Il existe deja un utilisateur avec ce mail");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		}
+
 	}
 
 
@@ -87,10 +97,17 @@ public class AdministrateurRestController {
 	 * @return 200 updated or 404 not found
 	 */
 	@PutMapping("/{idadmin}")
-	protected ResponseEntity<?> update(@PathVariable int idadmin, @RequestBody AdministrateurRequestDTO administrateurDTO) {
-    	service.update(idadmin,administrateurDTO);
-
-		return ResponseEntity.ok("Administrateur mis a jour");
+	public ResponseEntity<?> update(@PathVariable int idadmin, @Valid @RequestBody AdministrateurRequestDTO administrateurDTO) {
+    	boolean test=service.update(idadmin,administrateurDTO);
+		if(test){
+			response.put("message:","Administrateur mis a jour");
+			return ResponseEntity.ok(response);
+		}
+		else
+		{
+			response.put("erreur:","Il n'existe pas un admin avec cet id ou le mail donner appartient a un autre compte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 	}
 
 
@@ -102,7 +119,7 @@ public class AdministrateurRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idadmin}")
-	protected ResponseEntity<?> deleteById( @PathVariable int idadmin) {
+	public ResponseEntity<?> deleteById( @PathVariable int idadmin) {
     	service.deleteById(idadmin);
 
 		return ResponseEntity.ok("L'amin a bien ete supprimer");

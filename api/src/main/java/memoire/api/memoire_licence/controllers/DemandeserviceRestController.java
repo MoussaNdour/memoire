@@ -1,9 +1,20 @@
 package memoire.api.memoire_licence.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.DemandeServiceRequestDTO;
 import memoire.api.memoire_licence.dto.response.DemandeServiceResponseDTO;
+import memoire.api.memoire_licence.entities.Client;
+import memoire.api.memoire_licence.entities.Contrat;
+import memoire.api.memoire_licence.entities.Prestataire;
+import memoire.api.memoire_licence.entities.Service;
+import memoire.api.memoire_licence.repositories.ClientRepository;
+import memoire.api.memoire_licence.repositories.ContratRepository;
+import memoire.api.memoire_licence.repositories.PrestataireRepository;
+import memoire.api.memoire_licence.repositories.ServiceRepository;
 import memoire.api.memoire_licence.services.classes.DemandeserviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +37,19 @@ public class DemandeserviceRestController {
 
 
 	@Autowired
-	private DemandeserviceService service ; // injected
+	private DemandeserviceService service ;
+
+	@Autowired
+	private ClientRepository clientRepository;
+
+	@Autowired
+	private ServiceRepository serviceRepository;
+
+	@Autowired
+	private ContratRepository contratRepository;
+
+	@Autowired
+	private PrestataireRepository prestataireRepository;
 	
 
 	/**
@@ -35,7 +58,7 @@ public class DemandeserviceRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<DemandeServiceResponseDTO>> findAll() {
+	public ResponseEntity<List<DemandeServiceResponseDTO>> findAll() {
 		return ResponseEntity.ok(service.findAll());
     }
     
@@ -46,7 +69,7 @@ public class DemandeserviceRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{iddemande}")
-    protected ResponseEntity<?> findById(@PathVariable int iddemande) {
+    public ResponseEntity<?> findById(@PathVariable int iddemande) {
 		DemandeServiceResponseDTO demande=service.find(iddemande);
 
 		if(demande==null){
@@ -65,7 +88,31 @@ public class DemandeserviceRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<Void> create(@RequestBody DemandeServiceRequestDTO demandeserviceDTO) {
+	public ResponseEntity<?> create(@Valid @RequestBody DemandeServiceRequestDTO demandeserviceDTO) {
+		Client  client =clientRepository.findById(demandeserviceDTO.getIdclient()).orElse(null);
+		Prestataire prestataire=prestataireRepository.findById(demandeserviceDTO.getIdprestataire()).orElse(null);
+		Contrat contrat=contratRepository.findById(demandeserviceDTO.getIdcontrat()).orElse(null);
+		Service service1=serviceRepository.findById(demandeserviceDTO.getIdservice()).orElse(null);
+
+		HashMap<String,String> response=new HashMap<>();
+
+		if(client==null){
+			response.put("error","L'id du client est incorrect");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		if(prestataire==null){
+			response.put("error","L'id du prestataire est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		if(contrat==null){
+			response.put("error","L'id du contrat incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		if(service1==null){
+			response.put("error","L'id du service est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+
 		service.save(demandeserviceDTO);
 
 		return ResponseEntity.ok().build();
@@ -79,7 +126,31 @@ public class DemandeserviceRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{iddemande}")
-	protected ResponseEntity<?> update(@PathVariable int iddemande, @RequestBody DemandeServiceRequestDTO demandeserviceDTO) {
+	public ResponseEntity<?> update(@PathVariable int iddemande, @Valid @RequestBody DemandeServiceRequestDTO demandeserviceDTO) {
+		Client  client =clientRepository.findById(demandeserviceDTO.getIdclient()).orElse(null);
+		Prestataire prestataire=prestataireRepository.findById(demandeserviceDTO.getIdprestataire()).orElse(null);
+		Contrat contrat=contratRepository.findById(demandeserviceDTO.getIdcontrat()).orElse(null);
+		Service service1=serviceRepository.findById(demandeserviceDTO.getIdservice()).orElse(null);
+
+		HashMap<String,String> response=new HashMap<>();
+
+		if(client==null){
+			response.put("error","L'id du client est incorrect");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		if(prestataire==null){
+			response.put("error","L'id du prestataire est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		if(contrat==null){
+			response.put("error","L'id du contrat incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		if(service1==null){
+			response.put("error","L'id du service est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+
 		boolean test=service.update(iddemande,demandeserviceDTO);
 
 		if(test)
@@ -97,7 +168,7 @@ public class DemandeserviceRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{iddemande}")
-	protected ResponseEntity<Void> deleteById(@PathVariable int iddemande) {
+	public ResponseEntity<Void> deleteById(@PathVariable int iddemande) {
 		service.delete(iddemande);
 
 		return ResponseEntity.ok().build();

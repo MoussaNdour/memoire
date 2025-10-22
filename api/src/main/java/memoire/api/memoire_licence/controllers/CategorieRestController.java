@@ -1,5 +1,6 @@
 package memoire.api.memoire_licence.controllers;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.CategorieRequestDTO;
 import memoire.api.memoire_licence.dto.response.CategorieResponseDTO;
 import memoire.api.memoire_licence.services.interfaces.CategorieServiceInterface;
@@ -32,14 +33,14 @@ public class CategorieRestController {
 
 
     @PostMapping("")
-    public ResponseEntity<Void> create(CategorieRequestDTO requestDTO){
+    public ResponseEntity<Void> create(@Valid @RequestBody CategorieRequestDTO requestDTO){
         service.save(requestDTO);
 
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{idcategorie}")
-    public ResponseEntity<Void> update(@PathVariable int idcategorie, @RequestBody CategorieRequestDTO requestDTO){
+    public ResponseEntity<Void> update(@PathVariable int idcategorie, @Valid @RequestBody CategorieRequestDTO requestDTO){
         boolean test=service.update(idcategorie,requestDTO);
 
         if(test)

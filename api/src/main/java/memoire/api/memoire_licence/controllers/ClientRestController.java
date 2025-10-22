@@ -2,6 +2,7 @@ package memoire.api.memoire_licence.controllers;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.ClientRequestDTO;
 import memoire.api.memoire_licence.dto.response.ClientResponseDTO;
 import memoire.api.memoire_licence.services.classes.ClientService;
@@ -35,7 +36,7 @@ public class ClientRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<ClientResponseDTO>> findAll() {
+	public ResponseEntity<List<ClientResponseDTO>> findAll() {
 
 		return ResponseEntity.ok(service.findAll());
     }
@@ -46,7 +47,7 @@ public class ClientRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{idclient}")
-    protected ResponseEntity<?> findById(@PathVariable int idclient) {
+    public ResponseEntity<?> findById(@PathVariable int idclient) {
     	ClientResponseDTO dto=service.findById(idclient);
 
 		if(dto!=null){
@@ -65,7 +66,7 @@ public class ClientRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<?> create(@RequestBody ClientRequestDTO clientDTO) {
+	public ResponseEntity<?> create(@Valid @RequestBody ClientRequestDTO clientDTO) {
     	boolean test=service.create(clientDTO);
 		if(test)
 			return ResponseEntity.ok("Client cree avec succes");
@@ -81,7 +82,7 @@ public class ClientRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{idclient}")
-	protected ResponseEntity<?> update( @PathVariable int idclient, @RequestBody ClientRequestDTO clientDTO) {
+	public ResponseEntity<?> update(@PathVariable int idclient, @Valid @RequestBody ClientRequestDTO clientDTO) {
 		boolean test=service.update(idclient,clientDTO);
 		if(test)
 			return ResponseEntity.ok("Client modifier avec success");
@@ -98,7 +99,7 @@ public class ClientRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idclient}")
-	protected ResponseEntity<?> deleteById(@PathVariable int idclient) {
+	public ResponseEntity<?> deleteById(@PathVariable int idclient) {
     	service.deleteById(idclient);
 
 		return ResponseEntity.ok("Client supprimer avec succes");

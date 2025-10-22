@@ -43,7 +43,7 @@ public class PaiementRestController {
 	 * @return
 	 */
 	@GetMapping("")
-	protected ResponseEntity<List<PaiementDTO>> findAll() {
+	public ResponseEntity<List<PaiementDTO>> findAll() {
     	logger.debug("REST : GET - findAll");
     	List<PaiementDTO> list = service.findAll();
     	return ResponseEntity.ok(list); // always 200
@@ -56,7 +56,7 @@ public class PaiementRestController {
      * @return 200 or 404 
      */
     @GetMapping("/{idpaiement}")
-    protected ResponseEntity<PaiementDTO> findById(@PathVariable int idpaiement) {
+    public ResponseEntity<PaiementDTO> findById(@PathVariable int idpaiement) {
     	logger.debug("REST : GET - findById");
     	PaiementDTO paiementDTO = service.findById(idpaiement);
 		if ( paiementDTO != null ) {
@@ -75,7 +75,7 @@ public class PaiementRestController {
 	 * @return 201 created or 409 conflict
 	 */
 	@PostMapping("")
-	protected ResponseEntity<Void> create(@RequestBody PaiementDTO paiementDTO) {
+	public ResponseEntity<Void> create(@RequestBody PaiementDTO paiementDTO) {
     	logger.debug("REST : POST - create");
 		if ( service.create(paiementDTO) ) {
 			return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 created
@@ -93,7 +93,7 @@ public class PaiementRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{idpaiement}")
-	protected ResponseEntity<Void> save(@PathVariable int idpaiement, @RequestBody PaiementDTO paiementDTO) {
+	public ResponseEntity<Void> save(@PathVariable int idpaiement, @RequestBody PaiementDTO paiementDTO) {
     	logger.debug("REST : PUT - save");
 		service.save(idpaiement, paiementDTO);
 		return ResponseEntity.ok().build(); // OK, updated or created
@@ -106,7 +106,7 @@ public class PaiementRestController {
 	 * @return 200 updated or 404 not found
 	 */
 	@PutMapping("")
-	protected ResponseEntity<Void> update(@RequestBody PaiementDTO paiementDTO) {
+	public ResponseEntity<Void> update(@RequestBody PaiementDTO paiementDTO) {
     	logger.debug("REST : PUT - update");
 		if ( service.update(paiementDTO) ) {
 			return ResponseEntity.ok().build(); // 200 OK, found and updated
@@ -124,7 +124,7 @@ public class PaiementRestController {
 	 * @return 200 updated or 404 not found
 	 */
 	@PatchMapping("/{idpaiement}")
-	protected ResponseEntity<Void> partialUpdate(@PathVariable int idpaiement, @RequestBody PaiementDTO paiementDTO) {
+	public ResponseEntity<Void> partialUpdate(@PathVariable int idpaiement, @RequestBody PaiementDTO paiementDTO) {
     	logger.debug("REST : PATCH - partialUpdate");
     	if ( service.partialUpdate(idpaiement, paiementDTO) ) {
     		return ResponseEntity.ok().build(); // OK, found and updated
@@ -141,7 +141,7 @@ public class PaiementRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idpaiement}")
-	protected ResponseEntity<Void> deleteById(@PathVariable int idpaiement) {
+	public ResponseEntity<Void> deleteById(@PathVariable int idpaiement) {
     	logger.debug("REST : DELETE - deleteById");
 		if ( service.deleteById(idpaiement) ) {
 			return ResponseEntity.noContent().build(); // 204 No content = "deleted"
