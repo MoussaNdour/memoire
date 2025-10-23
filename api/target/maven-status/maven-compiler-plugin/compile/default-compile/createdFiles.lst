@@ -1,3 +1,4 @@
+memoire\api\memoire_licence\repositories\CategorieRepository.class
 memoire\api\memoire_licence\services\PaiementService.class
 memoire\api\memoire_licence\mappers\DemandeServiceResponseMapperImpl.class
 memoire\api\memoire_licence\services\UtilisateurService.class
@@ -8,9 +9,12 @@ memoire\api\memoire_licence\controllers\DemandeserviceRestController.class
 memoire\api\memoire_licence\MemoireLicenceApplication.class
 memoire\api\memoire_licence\controllers\EvaluationRestController.class
 memoire\api\memoire_licence\controllers\MainFunctionnalitiesController.class
+memoire\api\memoire_licence\services\interfaces\CategorieServiceInterface.class
 memoire\api\memoire_licence\services\classes\ContratService.class
 memoire\api\memoire_licence\services\classes\ServiceForServiceEntity.class
+memoire\api\memoire_licence\mappers\CategorieRequestMapper.class
 memoire\api\memoire_licence\repositories\PrestataireRepository.class
+memoire\api\memoire_licence\controllers\CategorieRestController.class
 memoire\api\memoire_licence\controllers\AdministrateurRestController.class
 memoire\api\memoire_licence\dto\response\ClientResponseDTO.class
 memoire\api\memoire_licence\dto\response\PrestataireResponseDTO.class
@@ -24,6 +28,7 @@ memoire\api\memoire_licence\mappers\ContratResponseMapperImpl.class
 memoire\api\memoire_licence\dto\request\ServiceRequestDTO.class
 memoire\api\memoire_licence\mappers\ServiceRequestMapperImpl.class
 memoire\api\memoire_licence\services\interfaces\LoginInterface.class
+memoire\api\memoire_licence\mappers\CategorieRequestMapperImpl.class
 memoire\api\memoire_licence\dto\response\AdministrateurResponseDTO.class
 memoire\api\memoire_licence\dto\request\ContratRequestDTO.class
 memoire\api\memoire_licence\repositories\DemandeserviceRepository.class
@@ -50,11 +55,14 @@ memoire\api\memoire_licence\dto\request\PrestataireRequestDTO.class
 memoire\api\memoire_licence\entities\Utilisateur.class
 memoire\api\memoire_licence\mappers\ServiceRequestMapper.class
 memoire\api\memoire_licence\repositories\ServiceRepository.class
+memoire\api\memoire_licence\entities\Categorie.class
 memoire\api\memoire_licence\mappers\ServiceResponseMapperImpl.class
 memoire\api\memoire_licence\mappers\ContratRequestMapper.class
 memoire\api\memoire_licence\entities\Service.class
 memoire\api\memoire_licence\mappers\ClientResponseMapper.class
 memoire\api\memoire_licence\services\interfaces\RegistrationInterface.class
+memoire\api\memoire_licence\mappers\CategorieResponseMapper.class
+memoire\api\memoire_licence\mappers\CategorieResponseMapperImpl.class
 memoire\api\memoire_licence\services\classes\Login.class
 memoire\api\memoire_licence\services\interfaces\ContratServiceInterface.class
 memoire\api\memoire_licence\entities\Client.class
@@ -66,9 +74,11 @@ memoire\api\memoire_licence\services\classes\Registration.class
 memoire\api\memoire_licence\entities\Administrateur.class
 memoire\api\memoire_licence\mappers\AdministrateurRequestMapperImpl.class
 memoire\api\memoire_licence\dto\request\AdministrateurRequestDTO.class
+memoire\api\memoire_licence\dto\request\CategorieRequestDTO.class
 memoire\api\memoire_licence\controllers\PrestataireRestController.class
 memoire\api\memoire_licence\mappers\ContratRequestMapperImpl.class
 memoire\api\memoire_licence\dto\request\DemandeServiceRequestDTO.class
+memoire\api\memoire_licence\services\classes\CategorieService.class
 memoire\api\memoire_licence\repositories\ContratRepository.class
 memoire\api\memoire_licence\mappers\LoginUtilisateurMapper.class
 memoire\api\memoire_licence\services\classes\AdministrateurService.class
@@ -76,6 +86,7 @@ memoire\api\memoire_licence\entities\Contrat.class
 memoire\api\memoire_licence\mappers\PrestataireResponseMapperImpl.class
 memoire\api\memoire_licence\services\interfaces\DemandeserviceServiceInterface.class
 memoire\api\memoire_licence\mappers\DemandeServiceRequestMapper.class
+memoire\api\memoire_licence\dto\response\CategorieResponseDTO.class
 memoire\api\memoire_licence\mappers\PrestataireRequestMapper.class
 memoire\api\memoire_licence\mappers\AdministrateurResponseMapper.class
 memoire\api\memoire_licence\repositories\ProposerRepository.class

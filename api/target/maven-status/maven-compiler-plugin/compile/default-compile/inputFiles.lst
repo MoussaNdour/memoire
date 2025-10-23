@@ -1,4 +1,5 @@
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\AdministrateurRestController.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\CategorieRestController.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\ClientRestController.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\ContratRestController.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\DemandeserviceRestController.java
@@ -9,6 +10,7 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\PrestataireRestController.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\controllers\ServiceRestController.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\AdministrateurRequestDTO.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\CategorieRequestDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\ClientRequestDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\ContratRequestDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\DemandeServiceRequestDTO.java
@@ -17,6 +19,7 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\RegisterUtilisateurDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\request\ServiceRequestDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\AdministrateurResponseDTO.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\CategorieResponseDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\ClientResponseDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\ContratResponseDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\DemandeServiceResponseDTO.java
@@ -26,6 +29,7 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\ServiceResponseDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\dto\response\UtilisateurDTO.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\entities\Administrateur.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\entities\Categorie.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\entities\Client.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\entities\Contrat.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\entities\Demandeservice.java
@@ -38,6 +42,8 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\exception\GlobalExceptionHandler.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\AdministrateurRequestMapper.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\AdministrateurResponseMapper.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\CategorieRequestMapper.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\CategorieResponseMapper.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\ClientRequestMapper.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\ClientResponseMapper.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\ContratRequestMapper.java
@@ -53,6 +59,7 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\mappers\UtilisateurMapper.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\MemoireLicenceApplication.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\repositories\AdministrateurRepository.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\repositories\CategorieRepository.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\repositories\ClientRepository.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\repositories\ContratRepository.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\repositories\DemandeserviceRepository.java
@@ -66,6 +73,7 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\security\OpenApiConfig.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\security\SecurityConfig.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\classes\AdministrateurService.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\classes\CategorieService.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\classes\ClientService.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\classes\ContratService.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\classes\DemandeserviceService.java
@@ -77,6 +85,7 @@ C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\CustomUserDetailsService.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\EvaluationService.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\interfaces\AdministrateurServiceInterface.java
+C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\interfaces\CategorieServiceInterface.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\interfaces\ClientServiceInterface.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\interfaces\ContratServiceInterface.java
 C:\Users\MoussaNDOUR\Desktop\Projects\Spring and Spring boot\memoire-licence\api\src\main\java\memoire\api\memoire_licence\services\interfaces\DemandeserviceServiceInterface.java
