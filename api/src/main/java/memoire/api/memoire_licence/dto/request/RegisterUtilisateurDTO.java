@@ -12,7 +12,7 @@ public class RegisterUtilisateurDTO {
     @Size(min = 4,message = "Le prenom doit au moins etre de 6 characteres")
     private String prenom ;
 
-    @NotNull
+    @Min(value = 700000000,message = "Le numero de telephone est invalide")
     @Digits(integer = 9,fraction = 0,message = "Le numero de telephone est invalide")
     private Long telephone ;
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-23T15:51:27+0000",
+    date = "2025-10-23T17:12:32+0000",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -22,34 +22,14 @@ public class AdministrateurResponseMapperImpl implements AdministrateurResponseM
 
         AdministrateurResponseDTO administrateurResponseDTO = new AdministrateurResponseDTO();
 
-        administrateurResponseDTO.setPrenom( adminUtilisateurPrenom( admin ) );
-        administrateurResponseDTO.setNom( adminUtilisateurNom( admin ) );
         administrateurResponseDTO.setEmail( adminUtilisateurEmail( admin ) );
         administrateurResponseDTO.setMotdepasse( adminUtilisateurMotdepasse( admin ) );
-        administrateurResponseDTO.setTelephone( adminUtilisateurTelephone( admin ) );
-        administrateurResponseDTO.setAdresse( adminUtilisateurAdresse( admin ) );
         administrateurResponseDTO.setRole( adminUtilisateurRole( admin ) );
         administrateurResponseDTO.setActif( adminUtilisateurActif( admin ) );
-        administrateurResponseDTO.setCodedaccess( admin.getCodedaccess() );
         administrateurResponseDTO.setIdadmin( admin.getIdadmin() );
+        administrateurResponseDTO.setCodedaccess( admin.getCodedaccess() );
 
         return administrateurResponseDTO;
-    }
-
-    private String adminUtilisateurPrenom(Administrateur administrateur) {
-        Utilisateur utilisateur = administrateur.getUtilisateur();
-        if ( utilisateur == null ) {
-            return null;
-        }
-        return utilisateur.getPrenom();
-    }
-
-    private String adminUtilisateurNom(Administrateur administrateur) {
-        Utilisateur utilisateur = administrateur.getUtilisateur();
-        if ( utilisateur == null ) {
-            return null;
-        }
-        return utilisateur.getNom();
     }
 
     private String adminUtilisateurEmail(Administrateur administrateur) {
@@ -66,22 +46,6 @@ public class AdministrateurResponseMapperImpl implements AdministrateurResponseM
             return null;
         }
         return utilisateur.getMotdepasse();
-    }
-
-    private Long adminUtilisateurTelephone(Administrateur administrateur) {
-        Utilisateur utilisateur = administrateur.getUtilisateur();
-        if ( utilisateur == null ) {
-            return null;
-        }
-        return utilisateur.getTelephone();
-    }
-
-    private String adminUtilisateurAdresse(Administrateur administrateur) {
-        Utilisateur utilisateur = administrateur.getUtilisateur();
-        if ( utilisateur == null ) {
-            return null;
-        }
-        return utilisateur.getAdresse();
     }
 
     private String adminUtilisateurRole(Administrateur administrateur) {

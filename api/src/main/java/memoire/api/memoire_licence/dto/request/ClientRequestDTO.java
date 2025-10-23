@@ -28,7 +28,7 @@ public class ClientRequestDTO implements Serializable {
 	@Size(min = 4,message="Le prenom doit etre au moins de 6 caracteres")
 	private String prenom ;
 
-	@Min(value = 700000000)
+	@Min(value = 700000000,message = "Le numero de telephone est invalide")
 	@Digits(integer = 9, fraction = 0,message="Le numero de telephone est invalide")
 	private Long telephone ;
 

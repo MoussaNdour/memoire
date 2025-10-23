@@ -6,20 +6,7 @@ import java.util.Date;
 public class AdministrateurResponseDTO implements Serializable {
     private int idadmin;
 
-    private String nom ;
-
-
-    private String prenom ;
-
-
-    private Long telephone ;
-
-
     private String email ;
-
-
-    private String adresse ;
-
 
     private String motdepasse ;
 
@@ -31,28 +18,13 @@ public class AdministrateurResponseDTO implements Serializable {
 
     private boolean actif;
 
-    public String getNom() {
-        return nom;
+
+    public int getIdadmin() {
+        return idadmin;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public Long getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(Long telephone) {
-        this.telephone = telephone;
+    public void setIdadmin(int idadmin) {
+        this.idadmin = idadmin;
     }
 
     public String getEmail() {
@@ -61,14 +33,6 @@ public class AdministrateurResponseDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
     }
 
     public String getMotdepasse() {
@@ -94,15 +58,6 @@ public class AdministrateurResponseDTO implements Serializable {
     public void setCodedaccess(Integer codedaccess) {
         this.codedaccess = codedaccess;
     }
-
-    public int getIdadmin() {
-        return idadmin;
-    }
-
-    public void setIdadmin(int idadmin) {
-        this.idadmin = idadmin;
-    }
-
 
     public boolean isActif() {
         return actif;

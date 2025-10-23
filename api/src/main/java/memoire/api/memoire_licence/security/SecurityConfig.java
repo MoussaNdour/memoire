@@ -32,7 +32,7 @@ public class SecurityConfig {
                     .authorizeHttpRequests(autorize-> autorize
                                 .requestMatchers("/api/v1/public/**").permitAll()
                                 .requestMatchers("/api/v1/service/**").permitAll()
-                                .requestMatchers("/api/v1/administrateur/**").hasRole("ADMIN")
+                                .requestMatchers("/api/v1/administrateur/**").permitAll()
                                 .requestMatchers("/api/v1/client/**").permitAll()
                                 .requestMatchers("/api/v1/prestataire/**").permitAll()
                                 .requestMatchers("/api/v1/demandeservice/**").permitAll()
