@@ -4,6 +4,7 @@
  */
 package memoire.api.memoire_licence.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
@@ -24,7 +25,7 @@ public class ClientRequestDTO implements Serializable {
 	private String nom ;
 
 	@NotBlank(message = "Le prenom doit etre renseigner")
-	@Size(min = 6,message="Le prenom doit etre au moins de 6 caracteres")
+	@Size(min = 4,message="Le prenom doit etre au moins de 6 caracteres")
 	private String prenom ;
 
 	@Min(value = 700000000)
@@ -36,13 +37,14 @@ public class ClientRequestDTO implements Serializable {
 	private String email ;
 
 	@NotBlank(message = "L'adresse doit etre renseigner")
-	@Size(min=6,message = "l'adresse doit etre au moins de 6 caracteres")
+	@Size(min=4,message = "l'adresse doit etre au moins de 6 caracteres")
 	private String adresse ;
 
 	@NotBlank(message = "Le mot de passe doit etre renseigner")
 	@Size(min=8,message = "Le mot doit etre au moins de 8 caracteres")
 	private String motdepasse ;
 
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "La date de naissance doit etre renseigner")
 	@Past(message = "La date de naissance doit etre dans le passe")
 	private Date date_de_naissance;

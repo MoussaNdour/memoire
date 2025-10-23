@@ -2,6 +2,7 @@ package memoire.api.memoire_licence.dto.request;
 
 
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,16 +11,16 @@ import java.util.Date;
 public class DemandeServiceRequestDTO {
 
     @NotNull(message = "Vous devez fournir l'id du client")
+    @Min(value = 1,message = "L'id du client doit etre renseigner")
     private Integer idclient;
 
     @NotNull(message = "Vous devez fournir l'id du prestataire")
+    @Min(value = 1,message = "L'id du prestataire doit etre renseigner")
     private Integer idprestataire;
 
     @NotNull(message = "Vous devez fournir l'id du prestataire")
+    @Min(value = 1,message = "L'id du service doit etre renseigner")
     private Integer idservice;
-
-    @FutureOrPresent(message = "La date d'une demande ne peut pas etre dans le passe")
-    private Date datedemande;
 
     @NotBlank(message = "Vous devez fournir des details sur la demande")
     private String detailsdemande;
@@ -29,6 +30,7 @@ public class DemandeServiceRequestDTO {
     private Date daterendezvous;
 
     @NotNull(message = "Vous devez fournir l'id du contrat pour cette demande")
+    @Min(value = 1,message = "L'id du contrat doit etre renseigner")
     private Integer idcontrat;
 
     public Integer getIdclient() {
@@ -55,13 +57,6 @@ public class DemandeServiceRequestDTO {
         this.idservice = idservice;
     }
 
-    public Date getDatedemande() {
-        return datedemande;
-    }
-
-    public void setDatedemande(Date datedemande) {
-        this.datedemande = datedemande;
-    }
 
     public String getDetailsdemande() {
         return detailsdemande;

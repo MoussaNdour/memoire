@@ -9,7 +9,7 @@ public class RegisterUtilisateurDTO {
     private String nom ;
 
     @NotBlank(message = "Le prenom de l'utilisateur ne peux pas etre nul")
-    @Size(min = 6,message = "Le prenom doit au moins etre de 6 characteres")
+    @Size(min = 4,message = "Le prenom doit au moins etre de 6 characteres")
     private String prenom ;
 
     @NotNull
@@ -21,7 +21,7 @@ public class RegisterUtilisateurDTO {
     private String email ;
 
     @NotBlank(message = "L'adresse de l'utilisateur ne peux pas etre nul")
-    @Size(min = 6,message = "L'adresse doit au moins etre de 6 characteres")
+    @Size(min = 4,message = "L'adresse doit au moins etre de 6 characteres")
     private String adresse ;
 
     @NotBlank(message = "Le mot de passe doit etre renseigner")

@@ -11,35 +11,32 @@ import jakarta.persistence.*;
 public class Demandeservice implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="iddemande", nullable=false)
-    private int        iddemande ;
-
+    private int  iddemande ;
 
     @Column(name="date_demande")
-    private Date  datededemande;
+    private Date datededemande;
 
     @Column(name="statut", length=254)
-    private String     statut="en attente" ;
+    private String statut="en_attente" ;
 
     @Column(name="details_demande", length=254)
-    private String     detailsdemande ;
+    private String detailsdemande ;
 
-    @Column(name="date_rendez_vous")
-    private Date  datederendezvous ;
+    @Column(name="daterendezvous")
+    private Date daterendezvous;
 
 
-    //--- LINKS ( RELATIONSHIPS )
     @OneToOne
     @JoinColumn(name="idpaiement", referencedColumnName="idpaiement")
-    private Paiement   paiement ; 
+    private Paiement   paiement;
 
     @OneToOne
     @JoinColumn(name="idcontrat", referencedColumnName="idcontrat")
-    private Contrat    contrat ;
+    private Contrat    contrat;
 
     @OneToOne
     @JoinColumn(name="idclient", referencedColumnName ="idclient" )
@@ -92,11 +89,12 @@ public class Demandeservice implements Serializable {
         return this.detailsdemande;
     }
 
-    public void setDatederendezvous( Date datederendezvous ) {
-        this.datederendezvous = datederendezvous ;
+    public Date getDaterendezvous() {
+        return daterendezvous;
     }
-    public Date getDatederendezvous() {
-        return this.datederendezvous;
+
+    public void setDaterendezvous(Date daterendezvous) {
+        this.daterendezvous = daterendezvous;
     }
 
     public Paiement getPaiement() {

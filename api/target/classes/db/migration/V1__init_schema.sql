@@ -119,7 +119,7 @@ CREATE TABLE DemandeService (
    idcontrat            INT,                      -- Contrat associé (optionnel)
    idpaiement           INT,                      -- Paiement associé (optionnel)
    date_demande      TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Date de la demande
-   date_rendez_vous  TIMESTAMP NOT NULL,       -- Date/heure du service
+   daterendezvous  TIMESTAMP NOT NULL,       -- Date/heure du service
    statut               VARCHAR(20) DEFAULT 'en_attente', -- Statut de la demande
    details_demande      TEXT,                     -- Détails de la demande
    FOREIGN KEY (idclient) REFERENCES Client(idclient) ON DELETE CASCADE,
@@ -161,7 +161,7 @@ CREATE INDEX idx_utilisateur_email ON Utilisateur(email);
 
 -- Index pour la table DemandeService (requêtes fréquentes)
 CREATE INDEX idx_demande_statut ON DemandeService(statut);
-CREATE INDEX idx_demande_date_rendez_vous ON DemandeService(date_rendez_vous);
+CREATE INDEX idx_demande_daterendezvous ON DemandeService(daterendezvous);
 CREATE INDEX idx_demande_client ON DemandeService(idclient);
 CREATE INDEX idx_demande_prestataire ON DemandeService(idprestataire);
 
@@ -198,7 +198,7 @@ CHECK (statutPaiement IN ('en_attente', 'payé', 'échoué', 'remboursé', 'en_t
 
 -- Vérification que les dates de rendez-vous sont dans le futur
 ALTER TABLE DemandeService ADD CONSTRAINT chk_date_rendezvous_futur 
-CHECK (date_rendez_vous > date_demande);
+CHECK (daterendezvous > date_demande);
 
 -- Vérification que la note est entre 1 et 5
 ALTER TABLE Evaluation ADD CONSTRAINT chk_note_valide 

@@ -1,10 +1,10 @@
 package memoire.api.memoire_licence.dto.request;
 
 
+
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * DTO class for "Administrateur"
@@ -21,7 +21,7 @@ public class AdministrateurRequestDTO implements Serializable {
     private String nom ;
 
     @NotBlank(message = "Le prenom doit etre renseigner")
-    @Size(min = 6,message="Le prenom doit etre au moins de 6 caracteres")
+    @Size(min = 4,message="Le prenom doit etre au moins de 6 caracteres")
     private String prenom;
 
     @Min(value = 700000000,message = "Le numero de telephone est invalide")
@@ -33,7 +33,7 @@ public class AdministrateurRequestDTO implements Serializable {
     private String email ;
 
     @NotBlank(message = "L'adresse doit etre renseigner")
-    @Size(min=6,message = "l'adresse doit etre au moins de 6 caracteres")
+    @Size(min=4,message = "l'adresse doit etre au moins de 6 caracteres")
     private String adresse ;
 
     @NotBlank(message = "Le mot de passe doit etre renseigner")
@@ -44,9 +44,6 @@ public class AdministrateurRequestDTO implements Serializable {
     @Digits(integer = 4, fraction = 0,message = "Le code d'acces doit etre exactement 4 chiffres")
     private Integer codedaccess ;
 
-    @NotNull(message = "La date de naissance doit etre renseigner")
-    @Past(message = "La date de naissance doit etre dans le passe")
-    private Date date_de_naissance;
 
 
     /**
@@ -114,13 +111,6 @@ public class AdministrateurRequestDTO implements Serializable {
         this.motdepasse = motdepasse;
     }
 
-    public Date getDate_de_naissance() {
-        return date_de_naissance;
-    }
-
-    public void setDate_de_naissance(Date date_de_naissance) {
-        this.date_de_naissance = date_de_naissance;
-    }
 
     @Override
 	public String toString() { 

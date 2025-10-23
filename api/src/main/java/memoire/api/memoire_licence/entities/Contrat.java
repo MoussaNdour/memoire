@@ -26,7 +26,7 @@ public class Contrat implements Serializable {
     @Column(name="horaires", length=254)
     private String horaires ;
 
-    @Column(name="jours", length=254)
+    @Column(name="jours_travail", length=254)
     private String jours ;
 
     @Column(name="montant_salaire")

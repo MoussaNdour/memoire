@@ -15,12 +15,7 @@ public interface DemandeServiceRequestMapper {
     @Mapping(source = "idprestataire", target = "prestataire.idprestataire")
     @Mapping(source = "idservice", target = "service.idservice")
     @Mapping(source = "idcontrat", target = "contrat.idcontrat")
+    @Mapping(source = "daterendezvous", target = "daterendezvous")
     Demandeservice toEntity(DemandeServiceRequestDTO dto);
 
-
-    @Mapping(source = "client.idclient", target = "idclient")
-    @Mapping(source = "prestataire.idprestataire", target = "idprestataire")
-    @Mapping(source = "service.idservice", target = "idservice")
-    @Mapping(source = "contrat.idcontrat", target = "idcontrat")
-    DemandeServiceRequestDTO toDTO(Demandeservice demande);
 }

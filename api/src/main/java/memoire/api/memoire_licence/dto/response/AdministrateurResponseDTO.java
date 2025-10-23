@@ -28,7 +28,6 @@ public class AdministrateurResponseDTO implements Serializable {
 
     private Integer codedaccess ;
 
-    private Date date_de_naissance;
 
     private boolean actif;
 
@@ -104,13 +103,6 @@ public class AdministrateurResponseDTO implements Serializable {
         this.idadmin = idadmin;
     }
 
-    public Date getDate_de_naissance() {
-        return date_de_naissance;
-    }
-
-    public void setDate_de_naissance(Date date_de_naissance) {
-        this.date_de_naissance = date_de_naissance;
-    }
 
     public boolean isActif() {
         return actif;

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-22T17:05:12+0000",
+    date = "2025-10-23T14:37:50+0000",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -36,6 +36,7 @@ public class DemandeServiceResponseMapperImpl implements DemandeServiceResponseM
         demandeServiceResponseDTO.setDuree( demandeContratDuree( demande ) );
         demandeServiceResponseDTO.setIddemande( demande.getIddemande() );
         demandeServiceResponseDTO.setStatut( demande.getStatut() );
+        demandeServiceResponseDTO.setDaterendezvous( demande.getDaterendezvous() );
 
         return demandeServiceResponseDTO;
     }

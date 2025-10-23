@@ -27,7 +27,7 @@ public class ContratRestController {
 
 
 	@Autowired
-	private ContratService service ; // injected
+	private ContratService service;
 
     
 	/**

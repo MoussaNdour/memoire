@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-22T17:05:13+0000",
+    date = "2025-10-23T14:37:52+0000",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -29,26 +29,10 @@ public class DemandeServiceRequestMapperImpl implements DemandeServiceRequestMap
         demandeservice.setPrestataire( demandeServiceRequestDTOToPrestataire( dto ) );
         demandeservice.setService( demandeServiceRequestDTOToService( dto ) );
         demandeservice.setContrat( demandeServiceRequestDTOToContrat( dto ) );
+        demandeservice.setDaterendezvous( dto.getDaterendezvous() );
         demandeservice.setDetailsdemande( dto.getDetailsdemande() );
 
         return demandeservice;
-    }
-
-    @Override
-    public DemandeServiceRequestDTO toDTO(Demandeservice demande) {
-        if ( demande == null ) {
-            return null;
-        }
-
-        DemandeServiceRequestDTO demandeServiceRequestDTO = new DemandeServiceRequestDTO();
-
-        demandeServiceRequestDTO.setIdclient( demandeClientIdclient( demande ) );
-        demandeServiceRequestDTO.setIdprestataire( demandePrestataireIdprestataire( demande ) );
-        demandeServiceRequestDTO.setIdservice( demandeServiceIdservice( demande ) );
-        demandeServiceRequestDTO.setIdcontrat( demandeContratIdcontrat( demande ) );
-        demandeServiceRequestDTO.setDetailsdemande( demande.getDetailsdemande() );
-
-        return demandeServiceRequestDTO;
     }
 
     protected Client demandeServiceRequestDTOToClient(DemandeServiceRequestDTO demandeServiceRequestDTO) {
@@ -105,37 +89,5 @@ public class DemandeServiceRequestMapperImpl implements DemandeServiceRequestMap
         }
 
         return contrat;
-    }
-
-    private Integer demandeClientIdclient(Demandeservice demandeservice) {
-        Client client = demandeservice.getClient();
-        if ( client == null ) {
-            return null;
-        }
-        return client.getIdclient();
-    }
-
-    private Integer demandePrestataireIdprestataire(Demandeservice demandeservice) {
-        Prestataire prestataire = demandeservice.getPrestataire();
-        if ( prestataire == null ) {
-            return null;
-        }
-        return prestataire.getIdprestataire();
-    }
-
-    private Integer demandeServiceIdservice(Demandeservice demandeservice) {
-        Service service = demandeservice.getService();
-        if ( service == null ) {
-            return null;
-        }
-        return service.getIdservice();
-    }
-
-    private Integer demandeContratIdcontrat(Demandeservice demandeservice) {
-        Contrat contrat = demandeservice.getContrat();
-        if ( contrat == null ) {
-            return null;
-        }
-        return contrat.getIdcontrat();
     }
 }
