@@ -14,9 +14,7 @@ import memoire.api.memoire_licence.dto.response.AdministrateurResponseDTO;
 import memoire.api.memoire_licence.services.classes.AdministrateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -76,37 +74,35 @@ public class AdministrateurRestController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<?> create(@Valid @RequestBody AdministrateurRequestDTO administrateurDTO) {
-    	boolean test=service.save(administrateurDTO);
-
-		if(test)
-			return ResponseEntity.ok("Admin cree avec succes");
-		else
-		{
-			response.put("erreur:","Il existe deja un utilisateur avec ce mail");
+		if(service.checkUserEmail(administrateurDTO.getEmail()))
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		else{
+			service.save(administrateurDTO);
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
-
 	}
-
 
 
 	/**
  	 * Update if exists 
 	 *
 	 * @param administrateurDTO
-	 * @return 200 updated or 404 not found
+	 * @return 200 updated or 404 not found or 409 conflict
 	 */
 	@PutMapping("/{idadmin}")
 	public ResponseEntity<?> update(@PathVariable int idadmin, @Valid @RequestBody AdministrateurRequestDTO administrateurDTO) {
-    	boolean test=service.update(idadmin,administrateurDTO);
-		if(test){
-			response.put("message:","Administrateur mis a jour");
-			return ResponseEntity.ok(response);
-		}
-		else
+		if(service.findById(idadmin)==null)
 		{
-			response.put("erreur:","Il n'existe pas un admin avec cet id ou le mail donner appartient a un autre compte");
+			response.put("erreur:","Il n'existe pas un admin avec cet id");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else if(service.checkUserEmail(administrateurDTO.getEmail())){
+			response.put("erreur:"," Le mail donner appartient a un autre compte");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		}
+		else{
+			service.update(idadmin,administrateurDTO);
+			return ResponseEntity.ok().build();
 		}
 	}
 
@@ -120,9 +116,15 @@ public class AdministrateurRestController {
 	 */
 	@DeleteMapping("/{idadmin}")
 	public ResponseEntity<?> deleteById( @PathVariable int idadmin) {
-    	service.deleteById(idadmin);
-
-		return ResponseEntity.ok("L'amin a bien ete supprimer");
+		if(service.findById(idadmin)==null)
+		{
+			response.put("erreur:","Il n'existe aucun utilisateur avec ce mail");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.deleteById(idadmin);
+			return ResponseEntity.status(204).build();
+		}
 	}
 
 }

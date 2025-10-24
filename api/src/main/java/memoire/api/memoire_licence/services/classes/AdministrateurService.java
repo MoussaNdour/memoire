@@ -58,62 +58,50 @@ public class AdministrateurService implements AdministrateurServiceInterface {
     }
 
     @Override
-    public boolean save(AdministrateurRequestDTO administrateurDTO) {
-        Utilisateur test=utilisateurRepository.findByEmail(administrateurDTO.getEmail()).orElse(null);
+    public void save(AdministrateurRequestDTO administrateurDTO) {
+        Administrateur admin=requestMapper.toEntity(administrateurDTO);
 
-        if(test==null){
-            Administrateur admin=requestMapper.toEntity(administrateurDTO);
+        Utilisateur user=admin.getUtilisateur();
+        user.setRole("ADMIN");
+        user.setMotdepasse(encoder.encode(user.getMotdepasse()));
 
-            Utilisateur user=admin.getUtilisateur();
-            user.setRole("ADMIN");
-            user.setMotdepasse(encoder.encode(user.getMotdepasse()));
-
-            utilisateurRepository.save(user);
-            repos.save(admin);
-
-            return true;
-        }
-        else
-            return false;
-
-
+        utilisateurRepository.save(user);
+        repos.save(admin);
     }
 
     @Override
-    public boolean update(int id,AdministrateurRequestDTO administrateurDTO) {
+    public void update(int id,AdministrateurRequestDTO administrateurDTO) {
         Administrateur admin=repos.findById(id).orElse(null);
-        if(admin!=null){
 
-            Administrateur updated=requestMapper.toEntity(administrateurDTO);
-            updated.setIdadmin(id);
+        Administrateur updated=requestMapper.toEntity(administrateurDTO);
+        updated.setIdadmin(id);
 
-            Utilisateur utilisateur=utilisateurRepository.findByEmail(updated.getUtilisateur().getEmail()).orElse(null);
-            if(utilisateur!=null){
-                return false;
-            }
-            else{
-                Utilisateur userUpdated=updated.getUtilisateur();
-                userUpdated.setIdutilisateur(admin.getUtilisateur().getIdutilisateur());
-                updated.setIdadmin(admin.getIdadmin());
-                userUpdated.setMotdepasse(encoder.encode(updated.getUtilisateur().getPassword()));
+        Utilisateur userUpdated=updated.getUtilisateur();
+        userUpdated.setIdutilisateur(admin.getUtilisateur().getIdutilisateur());
+        userUpdated.setMotdepasse(encoder.encode(updated.getUtilisateur().getPassword()));
+        userUpdated.setRole("ADMIN");
+        updated.setUtilisateur(userUpdated);
 
-                utilisateurRepository.save(userUpdated);
+        utilisateurRepository.save(userUpdated);
 
-                repos.save(updated);
+        repos.save(updated);
 
-                return true;
-            }
-        }
-        else{
-            return false;
-        }
     }
 
     @Transactional
     @Override
-    public boolean deleteById(int idadmin) {
+    public void deleteById(int idadmin) {
         repos.deleteById(idadmin);
+    }
 
-        return true;
+
+
+    @Override
+    public boolean checkUserEmail(String email) {
+        Utilisateur admin=utilisateurRepository.findByEmail(email).orElse(null);
+        if(admin!=null)
+            return true;
+        else
+            return false;
     }
 }

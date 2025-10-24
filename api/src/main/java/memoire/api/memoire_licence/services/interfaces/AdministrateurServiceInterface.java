@@ -11,9 +11,11 @@ public interface AdministrateurServiceInterface {
 
     AdministrateurResponseDTO findById(int idadmin);
 
-    boolean save(AdministrateurRequestDTO administrateurDTO);
+    void save(AdministrateurRequestDTO administrateurDTO);
 
-    boolean update(int id,AdministrateurRequestDTO administrateurDTO);
+    void update(int id,AdministrateurRequestDTO administrateurDTO);
 
-    boolean deleteById(int idadmin);
+    void deleteById(int idadmin);
+
+    boolean checkUserEmail(String email);
 }
