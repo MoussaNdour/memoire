@@ -58,62 +58,52 @@ public class ClientService implements ClientServiceInterface {
         else{
             return null;
         }
-
-    }
-
-    @Override
-    public boolean create(ClientRequestDTO clientDTO) {
-        Utilisateur test=utilisateurRepository.findByEmail(clientDTO.getEmail()).orElse(null);
-
-        if(test==null){
-            Client client=requestMapper.toEntity(clientDTO);
-            Utilisateur user=client.getUtilisateur();
-            user.setRole("CLIENT");
-            user.setMotdepasse(encoder.encode(user.getMotdepasse()));
-            utilisateurRepository.save(user);
-            repos.save(client);
-
-            return true;
-        }
-        else
-            return false;
-    }
-
-    @Override
-    public boolean update(int idclient, ClientRequestDTO clientDTO) {
-        Client test=repos.findById(idclient).orElse(null);
-
-        if(test==null){
-            return false;
-        }
-        else{
-
-            Client updated=requestMapper.toEntity(clientDTO);
-            updated.setIdclient(idclient);
-
-            Utilisateur utilisateur=utilisateurRepository.findByEmail(updated.getUtilisateur().getEmail()).orElse(null);
-            if(utilisateur!=null){
-                return false;
-            }
-            else{
-                Utilisateur userUpdated=updated.getUtilisateur();
-                userUpdated.setMotdepasse(encoder.encode(updated.getUtilisateur().getMotdepasse()));
-                userUpdated.setRole("CLIENT");
-                userUpdated.setIdutilisateur(test.getUtilisateur().getIdutilisateur());
-
-
-                utilisateurRepository.save(userUpdated);
-                repos.save(updated);
-
-                return true;
-            }
-        }
     }
 
     @Transactional
     @Override
-    public boolean deleteById(int idclient) {
+    public void create(ClientRequestDTO clientDTO) {
+
+        Client client=requestMapper.toEntity(clientDTO);
+        Utilisateur user=client.getUtilisateur();
+        user.setRole("CLIENT");
+        user.setMotdepasse(encoder.encode(user.getMotdepasse()));
+        utilisateurRepository.save(user);
+        repos.save(client);
+    }
+
+    @Transactional
+    @Override
+    public void update(int idclient, ClientRequestDTO clientDTO) {
+        Client client=repos.findById(idclient).orElse(null);
+        //System.out.println(client.toString());
+
+        Client updated=requestMapper.toEntity(clientDTO);
+        updated.setIdclient(idclient);
+
+        Utilisateur userUpdated=updated.getUtilisateur();
+        System.out.println(userUpdated.toString());
+        userUpdated.setMotdepasse(encoder.encode(userUpdated.getMotdepasse()));
+        userUpdated.setRole("CLIENT");
+        userUpdated.setIdutilisateur(client.getUtilisateur().getIdutilisateur());
+        updated.setUtilisateur(userUpdated);
+
+        utilisateurRepository.save(userUpdated);
+        repos.save(updated);
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(int idclient) {
         repos.deleteById(idclient);
-        return true;
+    }
+
+    @Override
+    public boolean checkUserEmail(String email) {
+        if(utilisateurRepository.findByEmail(email).orElse(null)==null)
+            return false;
+        else
+            return true;
+
     }
 }

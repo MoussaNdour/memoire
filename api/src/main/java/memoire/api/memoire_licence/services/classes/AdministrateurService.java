@@ -57,6 +57,7 @@ public class AdministrateurService implements AdministrateurServiceInterface {
         }
     }
 
+    @Transactional
     @Override
     public void save(AdministrateurRequestDTO administrateurDTO) {
         Administrateur admin=requestMapper.toEntity(administrateurDTO);
@@ -69,6 +70,7 @@ public class AdministrateurService implements AdministrateurServiceInterface {
         repos.save(admin);
     }
 
+    @Transactional
     @Override
     public void update(int id,AdministrateurRequestDTO administrateurDTO) {
         Administrateur admin=repos.findById(id).orElse(null);

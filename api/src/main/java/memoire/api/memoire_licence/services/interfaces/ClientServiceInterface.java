@@ -11,9 +11,11 @@ public interface ClientServiceInterface {
 
     ClientResponseDTO findById(int idclient);
 
-    boolean create(ClientRequestDTO clientDTO);
+    void create(ClientRequestDTO clientDTO);
 
-    boolean update(int idclient, ClientRequestDTO clientDTO);
+    void update(int idclient, ClientRequestDTO clientDTO);
 
-    boolean deleteById(int idclient);
+    void deleteById(int idclient);
+
+    boolean checkUserEmail(String email);
 }

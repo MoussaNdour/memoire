@@ -53,14 +53,6 @@ public class Client implements Serializable {
         return this.utilisateur;
     } 
 
-	@Override
-	public String toString() { 
-		String separator = "|";
-		StringBuilder sb = new StringBuilder();
-		sb.append("Client[");
-		sb.append(separator).append("idclient=").append(idclient);
-		sb.append("]");
-		return sb.toString();
-	}
+
 
 }

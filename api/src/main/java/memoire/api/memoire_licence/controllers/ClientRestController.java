@@ -1,6 +1,8 @@
 package memoire.api.memoire_licence.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.ClientRequestDTO;
@@ -28,7 +30,7 @@ public class ClientRestController {
 	@Autowired
 	private ClientService service;
 	
-
+	private Map<String,String> response=new HashMap<>();
     
 	/**
 	 * Get ALL
@@ -37,7 +39,6 @@ public class ClientRestController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<List<ClientResponseDTO>> findAll() {
-
 		return ResponseEntity.ok(service.findAll());
     }
     
@@ -67,11 +68,15 @@ public class ClientRestController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<?> create(@Valid @RequestBody ClientRequestDTO clientDTO) {
-    	boolean test=service.create(clientDTO);
-		if(test)
-			return ResponseEntity.ok("Client cree avec succes");
-		else
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Il existe deja un client avec ce mail");
+		if(service.checkUserEmail(clientDTO.getEmail()))
+		{
+			response.put("erreur:","Il existe deja un client avec ce mail");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		}
+		else{
+			service.create(clientDTO);
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		}
 	}
 
 	/**
@@ -83,11 +88,19 @@ public class ClientRestController {
 	 */
 	@PutMapping("/{idclient}")
 	public ResponseEntity<?> update(@PathVariable int idclient, @Valid @RequestBody ClientRequestDTO clientDTO) {
-		boolean test=service.update(idclient,clientDTO);
-		if(test)
-			return ResponseEntity.ok("Client modifier avec success");
-		else
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Il n'existe pas un client avec un tel id");
+		if(service.findById(idclient)==null){
+			response.put("erreur:","Il n'existe aucun utilisateur avec cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else if(service.checkUserEmail(clientDTO.getEmail())){
+			response.put("erreur:","Il existe deja un client avec ce mail");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		}
+		else{
+			service.update(idclient,clientDTO);
+			return ResponseEntity.ok().build();
+		}
+
 	}
 
 
@@ -100,9 +113,14 @@ public class ClientRestController {
 	 */
 	@DeleteMapping("/{idclient}")
 	public ResponseEntity<?> deleteById(@PathVariable int idclient) {
-    	service.deleteById(idclient);
-
-		return ResponseEntity.ok("Client supprimer avec succes");
+		if(service.findById(idclient)==null){
+			response.put("erreur:","Il n'existe aucun utilisateur avec cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.deleteById(idclient);
+			return ResponseEntity.status(204).build();
+		}
 	}
 
 }
