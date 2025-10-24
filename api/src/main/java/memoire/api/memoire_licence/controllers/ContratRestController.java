@@ -1,6 +1,8 @@
 package memoire.api.memoire_licence.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.ContratRequestDTO;
@@ -29,6 +31,8 @@ public class ContratRestController {
 	@Autowired
 	private ContratService service;
 
+	private Map<String,String> response=new HashMap<>();
+
     
 	/**
 	 * Get ALL
@@ -56,7 +60,6 @@ public class ContratRestController {
 		else{
 			return ResponseEntity.ok(contrat);
 		}
-
     }
 
     
@@ -69,7 +72,7 @@ public class ContratRestController {
 	@PostMapping("")
 	public ResponseEntity<Void> create(@Valid @RequestBody ContratRequestDTO contratDTO) {
 		service.save(contratDTO);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	/**
@@ -80,16 +83,16 @@ public class ContratRestController {
 	 * @return 200 updated or created
 	 */
 	@PutMapping("/{idcontrat}")
-	public ResponseEntity<Void> update(@PathVariable int idcontrat, @Valid @RequestBody ContratRequestDTO contratDTO) {
-		boolean test=service.update(idcontrat,contratDTO);
-
-		if(test)
+	public ResponseEntity<?> update(@PathVariable int idcontrat, @Valid @RequestBody ContratRequestDTO contratDTO) {
+		if(service.find(idcontrat)==null){
+			response.put("erreur:","Il n'existe pas de contrat avec cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.update(idcontrat,contratDTO);
 			return ResponseEntity.ok().build();
-		else
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
-
-
 
 
 
@@ -100,10 +103,16 @@ public class ContratRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{idcontrat}")
-	public ResponseEntity<Void> deleteById(@PathVariable int idcontrat) {
-		service.delete(idcontrat);
+	public ResponseEntity<?> deleteById(@PathVariable int idcontrat) {
+		if(service.find(idcontrat)==null){
+			response.put("erreur:","Il n'existe pas de contrat avec cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.delete(idcontrat);
+			return ResponseEntity.status(204).build();
+		}
 
-		return ResponseEntity.ok().build();
 	}
 
 }

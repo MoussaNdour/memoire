@@ -76,7 +76,6 @@ public class ClientService implements ClientServiceInterface {
     @Override
     public void update(int idclient, ClientRequestDTO clientDTO) {
         Client client=repos.findById(idclient).orElse(null);
-        //System.out.println(client.toString());
 
         Client updated=requestMapper.toEntity(clientDTO);
         updated.setIdclient(idclient);

@@ -63,22 +63,18 @@ public class ContratService implements ContratServiceInterface {
     }
 
     @Override
-    public boolean update(int id, ContratRequestDTO contratDTO) {
+    public void update(int id, ContratRequestDTO contratDTO) {
+
         Contrat contrat=repos.findById(id).orElse(null);
-        if(contrat!=null){
-            Contrat updated=new Contrat();
-            updated.setIdcontrat(contrat.getIdcontrat());
-            updated.setDuree(contratDTO.getDuree());
-            updated.setHoraires(contratDTO.getHoraires());
-            updated.setJours(contratDTO.getJours());
-            updated.setType_contrat(contrat.getType_contrat());
-            updated.setMontantSalaire(contratDTO.getMontantSalaire());
+        Contrat updated=new Contrat();
+        updated.setIdcontrat(contrat.getIdcontrat());
+        updated.setDuree(contratDTO.getDuree());
+        updated.setHoraires(contratDTO.getHoraires());
+        updated.setJours(contratDTO.getJours());
+        updated.setType_contrat(contrat.getType_contrat());
+        updated.setMontantSalaire(contratDTO.getMontantSalaire());
 
-            repos.save(updated);
+        repos.save(updated);
 
-            return true;
-        }
-        else
-            return false;
     }
 }

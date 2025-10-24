@@ -14,5 +14,5 @@ public interface ContratServiceInterface {
 
     void delete(int id);
 
-    boolean update(int id, ContratRequestDTO contratDTO);
+    void update(int id, ContratRequestDTO contratDTO);
 }
