@@ -44,31 +44,38 @@ public class CategorieService implements CategorieServiceInterface {
     }
 
     @Override
-    public boolean save(CategorieRequestDTO categorie) {
+    public void save(CategorieRequestDTO categorie) {
+        categorie.setLibelle(categorie.getLibelle());
         repos.save(requestMapper.toEntity(categorie));
-
-        return true;
     }
 
     @Override
-    public boolean update(int idcategorie, CategorieRequestDTO categorie) {
-        Categorie test=repos.findById(idcategorie).orElse(null);
-        if(test==null){
-            return false;
-        }
-        else{
-            Categorie updated=new Categorie();
-            updated.setIdcategorie(idcategorie);
-            updated.setLibelle(categorie.getLibelle());
-            repos.save(updated);
+    public void update(int idcategorie, CategorieRequestDTO categorie) {
 
-            return true;
-        }
+        Categorie updated=new Categorie();
+        updated.setIdcategorie(idcategorie);
+        updated.setLibelle(categorie.getLibelle());
+        repos.save(updated);
 
     }
 
     @Override
     public void deleteById(int idcategorie) {
         repos.deleteById(idcategorie);
+    }
+
+    @Override
+    public boolean checkCategorieName(String libelle) {
+        List<CategorieResponseDTO> categories=findAll();
+        if(categories.size()==0)
+            return false;
+        else{
+            for(CategorieResponseDTO categorie:categories){
+                if(categorie.getLibelle().toLowerCase().equals(libelle.toLowerCase()))
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

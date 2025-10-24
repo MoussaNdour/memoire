@@ -5,10 +5,13 @@ import memoire.api.memoire_licence.dto.request.CategorieRequestDTO;
 import memoire.api.memoire_licence.dto.response.CategorieResponseDTO;
 import memoire.api.memoire_licence.services.interfaces.CategorieServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/categorie")
@@ -16,6 +19,9 @@ public class CategorieRestController {
 
     @Autowired
     CategorieServiceInterface service;
+
+    private Map<String,String> response=new HashMap<>();
+
 
     @GetMapping("")
     public ResponseEntity<List<CategorieResponseDTO>> findAll(){
@@ -33,26 +39,43 @@ public class CategorieRestController {
 
 
     @PostMapping("")
-    public ResponseEntity<Void> create(@Valid @RequestBody CategorieRequestDTO requestDTO){
-        service.save(requestDTO);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> create(@Valid @RequestBody CategorieRequestDTO requestDTO){
+        if(service.checkCategorieName(requestDTO.getLibelle()))
+        {
+            response.put("erreur:","Cette categorie existe deja");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        }
+        else{
+            service.save(requestDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
     }
 
     @PutMapping("/{idcategorie}")
-    public ResponseEntity<Void> update(@PathVariable int idcategorie, @Valid @RequestBody CategorieRequestDTO requestDTO){
-        boolean test=service.update(idcategorie,requestDTO);
-
-        if(test)
+    public ResponseEntity<?> update(@PathVariable int idcategorie, @Valid @RequestBody CategorieRequestDTO requestDTO){
+        if(service.findById(idcategorie)==null){
+            response.put("erreur:","Il n'existe aucune categorie avec cet id");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+        else if(service.checkCategorieName(requestDTO.getLibelle())){
+            response.put("erreur:","Cette categorie existe deja");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        }
+        else{
+            service.update(idcategorie,requestDTO);
             return ResponseEntity.ok().build();
-        else
-            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{idcategorie}")
-    public ResponseEntity<Void> delete(@PathVariable int idcategorie){
-        service.deleteById(idcategorie);
-
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> delete(@PathVariable int idcategorie){
+        if(service.findById(idcategorie)==null){
+            response.put("erreur:","Il n'existe aucune categorie avec cet id");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+        else{
+            service.deleteById(idcategorie);
+            return ResponseEntity.status(204).build();
+        }
     }
 }

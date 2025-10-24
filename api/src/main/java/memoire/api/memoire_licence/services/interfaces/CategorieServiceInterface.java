@@ -12,9 +12,11 @@ public interface CategorieServiceInterface {
 
     CategorieResponseDTO findById(int idcategorie);
 
-    boolean save(CategorieRequestDTO categorie);
+    void save(CategorieRequestDTO categorie);
 
-    boolean update(int idcategorie, CategorieRequestDTO categorie);
+    void update(int idcategorie, CategorieRequestDTO categorie);
 
     void deleteById(int idcategorie);
+
+    boolean checkCategorieName(String libelle);
 }

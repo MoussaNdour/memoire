@@ -118,7 +118,7 @@ public class AdministrateurRestController {
 	public ResponseEntity<?> deleteById( @PathVariable int idadmin) {
 		if(service.findById(idadmin)==null)
 		{
-			response.put("erreur:","Il n'existe aucun utilisateur avec ce mail");
+			response.put("erreur:","Il n'existe aucun utilisateur avec cet id");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 		else{
