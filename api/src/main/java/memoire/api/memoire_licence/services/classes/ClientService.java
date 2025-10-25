@@ -94,7 +94,9 @@ public class ClientService implements ClientServiceInterface {
     @Transactional
     @Override
     public void deleteById(int idclient) {
+        Client client=repos.findById(idclient).orElse(null);
         repos.deleteById(idclient);
+        utilisateurRepository.deleteByEmail(client.getUtilisateur().getEmail());
     }
 
     @Override

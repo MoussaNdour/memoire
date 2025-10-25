@@ -93,7 +93,9 @@ public class AdministrateurService implements AdministrateurServiceInterface {
     @Transactional
     @Override
     public void deleteById(int idadmin) {
+        Administrateur administrateur=repos.findById(idadmin).orElse(null);
         repos.deleteById(idadmin);
+        utilisateurRepository.deleteByEmail(administrateur.getUtilisateur().getEmail());
     }
 
 

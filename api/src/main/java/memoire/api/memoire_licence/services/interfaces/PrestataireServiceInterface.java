@@ -12,9 +12,11 @@ public interface PrestataireServiceInterface
 
     PrestataireResponseDTO findById(int idpresta);
 
-    boolean create(PrestataireRequestDTO prestataireDTO);
+    void create(PrestataireRequestDTO prestataireDTO);
 
-    boolean update(int idpresta, PrestataireRequestDTO prestataireDTO);
+    void update(int idpresta, PrestataireRequestDTO prestataireDTO);
 
-    boolean deleteById(int idpresta);
+    void deleteById(int idpresta);
+
+    boolean checkUserEmail(String email);
 }

@@ -1,5 +1,6 @@
 package memoire.api.memoire_licence.services.classes;
 
+import jakarta.transaction.Transactional;
 import memoire.api.memoire_licence.dto.request.DemandeServiceRequestDTO;
 import memoire.api.memoire_licence.dto.response.DemandeServiceResponseDTO;
 import memoire.api.memoire_licence.entities.Demandeservice;
@@ -27,6 +28,7 @@ public class DemandeserviceService implements DemandeserviceServiceInterface {
     @Autowired
     DemandeServiceResponseMapper responseMapper;
 
+    @Transactional
     @Override
     public void save(DemandeServiceRequestDTO dto) {
         repos.save(requestMapper.toEntity(dto));
@@ -43,6 +45,7 @@ public class DemandeserviceService implements DemandeserviceServiceInterface {
         return demandes;
     }
 
+    @Transactional
     @Override
     public void update(int id, DemandeServiceRequestDTO dto) {
         Demandeservice demande=repos.findById(id).orElse(null);
@@ -65,6 +68,7 @@ public class DemandeserviceService implements DemandeserviceServiceInterface {
         }
     }
 
+    @Transactional
     @Override
     public void delete(int id) {
         repos.deleteById(id);

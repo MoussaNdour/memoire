@@ -58,58 +58,52 @@ public class PrestataireService implements PrestataireServiceInterface {
 
     }
 
+    @Transactional
     @Override
-    public boolean create(PrestataireRequestDTO prestataireDTO) {
+    public void create(PrestataireRequestDTO prestataireDTO) {
 
-        Utilisateur test=utilisateurRepos.findByEmail(prestataireDTO.getEmail()).orElse(null);
-        if(test==null){
-            Prestataire prestataire=requestMapper.toEntity(prestataireDTO);
-            Utilisateur user=prestataire.getUtilisateur();
-            user.setRole("PRESTATAIRE");
-            user.setMotdepasse(encoder.encode(user.getMotdepasse()));
-            utilisateurRepos.save(user);
-            repos.save(prestataire);
-            return true;
-        }
-        else{
-            return false;
-        }
+        Prestataire prestataire=requestMapper.toEntity(prestataireDTO);
+        Utilisateur user=prestataire.getUtilisateur();
+        user.setRole("PRESTATAIRE");
+        user.setMotdepasse(encoder.encode(user.getMotdepasse()));
+        utilisateurRepos.save(user);
+        repos.save(prestataire);
 
-    }
-
-    @Override
-    public boolean update(int idpresta, PrestataireRequestDTO prestataireDTO) {
-        Prestataire test=repos.findById(idpresta).orElse(null);
-        if(test==null){
-            return false;
-        }
-        else{
-
-            Prestataire prestataire=requestMapper.toEntity(prestataireDTO);
-            prestataire.setIdprestataire(idpresta);
-
-            Utilisateur utilisateur=utilisateurRepos.findByEmail(prestataire.getUtilisateur().getEmail()).orElse(null);
-            if(utilisateur!=null)
-            {
-                return false;
-            }
-            else{
-                Utilisateur user=prestataire.getUtilisateur();
-                user.setIdutilisateur(prestataire.getUtilisateur().getIdutilisateur());
-                user.setMotdepasse(encoder.encode(prestataire.getUtilisateur().getMotdepasse()));
-                user.setRole("PRESTATAIRE");
-
-                utilisateurRepos.save(user);
-                repos.save(prestataire);
-                return true;
-            }
-        }
     }
 
     @Transactional
     @Override
-    public boolean deleteById(int idpresta) {
+    public void update(int idpresta, PrestataireRequestDTO prestataireDTO) {
+        Prestataire test=repos.findById(idpresta).orElse(null);
+
+        Prestataire prestataire=requestMapper.toEntity(prestataireDTO);
+        prestataire.setIdprestataire(idpresta);
+
+
+        Utilisateur user=prestataire.getUtilisateur();
+        user.setIdutilisateur(test.getUtilisateur().getIdutilisateur());
+        user.setMotdepasse(encoder.encode(prestataire.getUtilisateur().getMotdepasse()));
+        user.setRole("PRESTATAIRE");
+        prestataire.setUtilisateur(user);
+
+        utilisateurRepos.save(user);
+        repos.save(prestataire);
+    }
+
+    @Transactional
+    @Override
+    public void deleteById(int idpresta) {
+        Prestataire prestataire=repos.findById(idpresta).orElse(null);
         repos.deleteById(idpresta);
-        return true;
+        utilisateurRepos.deleteByEmail(prestataire.getUtilisateur().getEmail());
+    }
+
+    @Override
+    public boolean checkUserEmail(String email) {
+        Utilisateur user=utilisateurRepos.findByEmail(email).orElse(null);
+        if(user!=null)
+            return true;
+        else
+            return false;
     }
 }

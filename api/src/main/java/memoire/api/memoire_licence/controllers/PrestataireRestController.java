@@ -4,7 +4,9 @@
  */
 package memoire.api.memoire_licence.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.validation.Valid;
 import memoire.api.memoire_licence.dto.request.PrestataireRequestDTO;
@@ -32,7 +34,8 @@ public class PrestataireRestController {
 
 	@Autowired
 	private PrestataireServiceInterface service ; // injected
-	
+
+	private Map<String,String> response=new HashMap<>();
 
 	/**
 	 * Get ALL
@@ -69,11 +72,15 @@ public class PrestataireRestController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<?> create(@Valid @RequestBody PrestataireRequestDTO prestataireDTO) {
-		boolean test=service.create(prestataireDTO);
-		if(test)
-			return ResponseEntity.ok("Prestataire creer avec succes");
-		else
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Il existe deja un utilisateur avec ce mail");
+		if(service.checkUserEmail(prestataireDTO.getEmail())){
+			response.put("erreur:","Il existe deja un utilisateur avec ce mail");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		}
+		else{
+			service.create(prestataireDTO);
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		}
+
 	}
 
 	/**
@@ -85,11 +92,15 @@ public class PrestataireRestController {
 	 */
 	@PutMapping("/{idprestataire}")
 	public ResponseEntity<?> update(@PathVariable int idprestataire, @Valid @RequestBody PrestataireRequestDTO prestataireDTO) {
-		boolean test=service.update(idprestataire,prestataireDTO);
-		if(test)
-			return ResponseEntity.ok("Prestataire mis a jour avec succes");
-		else
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Il n'existe pas un prestataire avec cet id");
+		if(service.checkUserEmail(prestataireDTO.getEmail())){
+			response.put("erreur:","Il existe deja un utilisateur avec ce mail");
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+		}
+		else{
+			service.update(idprestataire,prestataireDTO);
+			return ResponseEntity.ok().build();
+		}
+
 	}
 
 
@@ -100,8 +111,14 @@ public class PrestataireRestController {
 	 */
 	@DeleteMapping("/{idprestataire}")
 	public ResponseEntity<?> deleteById(@PathVariable int idprestataire) {
-		service.deleteById(idprestataire);
-		return ResponseEntity.ok("Prestataire supprimer avec succes");
+		if(service.findById(idprestataire)==null){
+			response.put("erreur:","Il n'existe aucun prestataire avec cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.deleteById(idprestataire);
+			return ResponseEntity.status(204).body("Prestataire supprimer avec succes");
+		}
 	}
 
 }
