@@ -27,18 +27,15 @@ public class ServiceForServiceEntity implements ServiceForServiceInterface {
     ServiceResponseMapper responseMapper;
 
     @Override
-    public boolean create(ServiceRequestDTO serviceDTO) {
+    public void create(ServiceRequestDTO serviceDTO) {
         memoire.api.memoire_licence.entities.Service service =requestMapper.toEntity(serviceDTO);
         repos.save(service);
-
-        return true;
     }
 
     @Transactional
     @Override
-    public boolean delete(int id) {
+    public void delete(int id) {
         repos.deleteById(id);
-        return true;
     }
 
     @Override
@@ -67,19 +64,11 @@ public class ServiceForServiceEntity implements ServiceForServiceInterface {
     }
 
     @Override
-    public boolean update(int id, ServiceRequestDTO serviceDTO) {
+    public void update(int id, ServiceRequestDTO serviceDTO) {
         memoire.api.memoire_licence.entities.Service service=repos.findById(id).orElse(null);
-        if(service!=null){
-            memoire.api.memoire_licence.entities.Service updated=requestMapper.toEntity(serviceDTO);
+        memoire.api.memoire_licence.entities.Service updated=requestMapper.toEntity(serviceDTO);
 
-            updated.setIdservice(service.getIdservice());
-            repos.save(updated);
-
-            return true;
-        }
-        else{
-            return false;
-        }
-
+        updated.setIdservice(id);
+        repos.save(updated);
     }
 }

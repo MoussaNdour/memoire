@@ -79,27 +79,25 @@ public class ServiceRestController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<?> create(@Valid @RequestBody ServiceRequestDTO serviceDTO) {
-		Categorie categorie=categorieRepository.findById(serviceDTO.getIdcategorie()).orElse(null);
-
 		Map<String,String> response=new HashMap<>();
 
-		if(categorie==null){
-			response.put("erreur","L'id du categorie est incorrecte");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		List<ServiceResponseDTO> services=service.findAll();
+		for(ServiceResponseDTO service:services){
+			if(service.getNom().toLowerCase().equals(serviceDTO.getNom().toLowerCase())){
+				response.put("erreur:","Ce service existe deja");
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+			}
 		}
 
 		service.create(serviceDTO);
-
-		response.put("message","Service cree avec succes");
-
-		return ResponseEntity.ok(response);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}
 
 
 	@PutMapping("/{idservice}")
 	public ResponseEntity<?> update(@PathVariable int idservice, @Valid @RequestBody ServiceRequestDTO serviceDTO) {
-		Categorie categorie=categorieRepository.findById(serviceDTO.getIdcategorie()).orElse(null);
+		Categorie categorie=categorieRepository.findById(idservice).orElse(null);
 
 		Map<String,String> response=new HashMap<>();
 
@@ -107,13 +105,18 @@ public class ServiceRestController {
 			response.put("erreur","L'id du categorie est incorrecte");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
-
-		service.update(idservice,serviceDTO);
-
-		response.put("message","Service mis a jour avec succes");
-
-		return ResponseEntity.ok(response);
-
+		else{
+			List<ServiceResponseDTO> services=service.findAll();
+			for(ServiceResponseDTO service:services){
+				if(service.getNom().toLowerCase().equals(serviceDTO.getNom().toLowerCase())){
+					response.put("erreur:","Ce service existe deja");
+					return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+				}
+			}
+			service.update(idservice,serviceDTO);
+			response.put("message","Service mis a jour avec succes");
+			return ResponseEntity.ok(response);
+		}
 	}
 
 
@@ -126,12 +129,20 @@ public class ServiceRestController {
 	 */
 	@DeleteMapping("/{idservice}")
 	public ResponseEntity<?> deleteById(@PathVariable int idservice) {
-		service.delete(idservice);
+		Categorie categorie=categorieRepository.findById(idservice).orElse(null);
 
 		Map<String,String> response=new HashMap<>();
-		response.put("message","Service supprimer avec succes");
 
-		return ResponseEntity.ok(response);
+		if(categorie==null){
+			response.put("erreur","L'id du categorie est incorrecte");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.delete(idservice);
+			response.put("message","Service supprimer avec succes");
+			return ResponseEntity.status(204).body(response);
+		}
+
 	}
 
 }

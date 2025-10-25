@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ServiceForServiceInterface {
 
-    boolean create(ServiceRequestDTO serviceDTO);
-    boolean delete(int id);
+    void create(ServiceRequestDTO serviceDTO);
+    void delete(int id);
     List<ServiceResponseDTO> findAll();
     ServiceResponseDTO findById(int id);
-    boolean update(int id, ServiceRequestDTO serviceDTO);
+    void update(int id, ServiceRequestDTO serviceDTO);
 }
