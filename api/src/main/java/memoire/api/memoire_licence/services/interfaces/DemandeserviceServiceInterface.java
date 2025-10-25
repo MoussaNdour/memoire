@@ -6,11 +6,11 @@ import memoire.api.memoire_licence.dto.response.DemandeServiceResponseDTO;
 import java.util.List;
 
 public interface DemandeserviceServiceInterface {
-    boolean save(DemandeServiceRequestDTO dto);
+    void save(DemandeServiceRequestDTO dto);
 
     List<DemandeServiceResponseDTO> findAll();
 
-    boolean update(int id, DemandeServiceRequestDTO dto);
+    void update(int id, DemandeServiceRequestDTO dto);
 
     DemandeServiceResponseDTO find(int id);
 

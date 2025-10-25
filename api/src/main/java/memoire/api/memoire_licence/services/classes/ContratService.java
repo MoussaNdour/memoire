@@ -42,7 +42,7 @@ public class ContratService implements ContratServiceInterface {
             contrats.add(responseMapper.toDTO((Contrat) i.next()));
         }
 
-        return List.of();
+        return contrats;
     }
 
     @Override

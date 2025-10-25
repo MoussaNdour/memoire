@@ -28,10 +28,8 @@ public class DemandeserviceService implements DemandeserviceServiceInterface {
     DemandeServiceResponseMapper responseMapper;
 
     @Override
-    public boolean save(DemandeServiceRequestDTO dto) {
+    public void save(DemandeServiceRequestDTO dto) {
         repos.save(requestMapper.toEntity(dto));
-
-        return true;
     }
 
     @Override
@@ -46,21 +44,15 @@ public class DemandeserviceService implements DemandeserviceServiceInterface {
     }
 
     @Override
-    public boolean update(int id, DemandeServiceRequestDTO dto) {
+    public void update(int id, DemandeServiceRequestDTO dto) {
         Demandeservice demande=repos.findById(id).orElse(null);
 
-        if(demande==null){
-            return false;
-        }
-        else{
-            Demandeservice updated=new Demandeservice();
-            updated=requestMapper.toEntity(dto);
-            updated.setIddemande(id);
+        Demandeservice updated=new Demandeservice();
+        updated=requestMapper.toEntity(dto);
+        updated.setIddemande(id);
 
-            repos.save(updated);
-        }
+        repos.save(updated);
 
-        return true;
     }
 
     @Override

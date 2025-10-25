@@ -114,7 +114,7 @@ public class DemandeserviceRestController {
 
 		service.save(demandeserviceDTO);
 
-		return ResponseEntity.ok().build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	/**
@@ -133,29 +133,32 @@ public class DemandeserviceRestController {
 
 		HashMap<String,String> response=new HashMap<>();
 
-		if(client==null){
-			response.put("error","L'id du client est incorrect");
+		if(service.find(iddemande)==null){
+			response.put("erreur:","Il n'existe aucune demande avec cet id");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
-		if(prestataire==null){
-			response.put("error","L'id du prestataire est incorrecte");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		}
-		if(contrat==null){
-			response.put("error","L'id du contrat incorrecte");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		}
-		if(service1==null){
-			response.put("error","L'id du service est incorrecte");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		}
+		else{
+			if(client==null){
+				response.put("error","L'id du client est incorrect");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+			}
+			if(prestataire==null){
+				response.put("error","L'id du prestataire est incorrecte");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+			}
+			if(contrat==null){
+				response.put("error","L'id du contrat incorrecte");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+			}
+			if(service1==null){
+				response.put("error","L'id du service est incorrecte");
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+			}
 
-		boolean test=service.update(iddemande,demandeserviceDTO);
+			service.update(iddemande,demandeserviceDTO);
 
-		if(test)
 			return ResponseEntity.ok().build();
-		else
-			return ResponseEntity.notFound().build();
+		}
 	}
 
 
@@ -167,10 +170,18 @@ public class DemandeserviceRestController {
 	 * @return 204 deleted or 404 not found
 	 */
 	@DeleteMapping("/{iddemande}")
-	public ResponseEntity<Void> deleteById(@PathVariable int iddemande) {
-		service.delete(iddemande);
+	public ResponseEntity<?> deleteById(@PathVariable int iddemande) {
+		HashMap<String,String> response=new HashMap<>();
 
-		return ResponseEntity.ok().build();
+		if(service.find(iddemande)==null){
+			response.put("erreur:","Il n'existe aucune demande avec cet id");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		else{
+			service.delete(iddemande);
+
+			return ResponseEntity.ok().build();
+		}
 	}
 
 }
