@@ -76,6 +76,8 @@ public class Service implements Serializable {
         this.categorie = categorie;
     }
 
+
+
     @Override
 	public String toString() { 
 		String separator = "|";

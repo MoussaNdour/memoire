@@ -27,7 +27,7 @@ public class Prestataire implements Serializable {
 
 
     @Column(name="disponibilite")
-    private Boolean    disponibilite ;
+    private String    disponibilite ;
 
     @Column(name="description", length=254)
     private String     description ;
@@ -56,14 +56,15 @@ public class Prestataire implements Serializable {
         this.idprestataire = idprestataire;
     }
 
-    public void setDisponibilite(Boolean disponibilite ) {
-        this.disponibilite = disponibilite ;
-    }
-    public Boolean getDisponibilite() {
-        return this.disponibilite;
+    public String getDisponibilite() {
+        return disponibilite;
     }
 
-    public void setDescription( String description ) {
+    public void setDisponibilite(String disponibilite) {
+        this.disponibilite = disponibilite;
+    }
+
+    public void setDescription(String description ) {
         this.description = description ;
     }
     public String getDescription() {

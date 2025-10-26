@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 public interface ServiceResponseMapper {
 
     @Mapping(source = "categorie.libelle", target = "categorie")
+    @Mapping(source = "categorie.icone", target = "icone")
     ServiceResponseDTO toDTO(Service service);
 }

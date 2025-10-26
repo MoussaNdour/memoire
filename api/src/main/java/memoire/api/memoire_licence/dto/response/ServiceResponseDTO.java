@@ -20,6 +20,7 @@ public class ServiceResponseDTO implements Serializable {
     private String nom ;
     private String description ;
     private String categorie;
+    private String icone;
 
 
     /**
@@ -59,5 +60,13 @@ public class ServiceResponseDTO implements Serializable {
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    public String getIcone() {
+        return icone;
+    }
+
+    public void setIcone(String icone) {
+        this.icone = icone;
     }
 }

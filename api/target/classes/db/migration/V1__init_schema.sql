@@ -31,20 +31,20 @@ DROP TABLE IF EXISTS Categorie;
 -- Table de base pour tous les types d'utilisateurs
 CREATE TABLE Utilisateur (
    idutilisateur        SERIAL PRIMARY KEY,        -- Auto-incrémentation
-   nom                  VARCHAR(100) NOT NULL,     -- Nom de l'utilisateur
-   prenom               VARCHAR(100) NOT NULL,     -- Prénom de l'utilisateur
-   telephone            VARCHAR(20) NOT NULL,      -- Format international
+   nom                  VARCHAR(100),     -- Nom de l'utilisateur
+   prenom               VARCHAR(100),     -- Prénom de l'utilisateur
+   telephone            VARCHAR(20),      -- Format international
    email                VARCHAR(254) UNIQUE NOT NULL, -- Email unique
-   adresse              VARCHAR(200) NOT NULL,     -- Adresse postale
+   adresse              VARCHAR(200) ,     -- Adresse postale
    motDePasse           VARCHAR(255) NOT NULL,     -- Mot de passe haché
    date_inscription     TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Date d'inscription
    date_de_naissance    date,
-   actif                boolean default true,
-   role     VARCHAR(30) not null -- Rôle: client, prestataire, admin
+   actif                BOOLEAN DEFAULT TRUE,
+   role     VARCHAR(30) not null
 );
 CREATE TABLE Categorie(
     idcategorie SERIAL PRIMARY KEY,
-    libelle VARCHAR(254) NOT NULL
+    libelle VARCHAR(254) UNIQUE NOT NULL
 );
 
 

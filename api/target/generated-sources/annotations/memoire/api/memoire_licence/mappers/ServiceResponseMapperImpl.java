@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-23T15:51:27+0000",
+    date = "2025-10-26T16:03:29+0000",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -23,6 +23,7 @@ public class ServiceResponseMapperImpl implements ServiceResponseMapper {
         ServiceResponseDTO serviceResponseDTO = new ServiceResponseDTO();
 
         serviceResponseDTO.setCategorie( serviceCategorieLibelle( service ) );
+        serviceResponseDTO.setIcone( serviceCategorieIcone( service ) );
         serviceResponseDTO.setIdservice( service.getIdservice() );
         serviceResponseDTO.setNom( service.getNom() );
         serviceResponseDTO.setDescription( service.getDescription() );
@@ -36,5 +37,13 @@ public class ServiceResponseMapperImpl implements ServiceResponseMapper {
             return null;
         }
         return categorie.getLibelle();
+    }
+
+    private String serviceCategorieIcone(Service service) {
+        Categorie categorie = service.getCategorie();
+        if ( categorie == null ) {
+            return null;
+        }
+        return categorie.getIcone();
     }
 }
