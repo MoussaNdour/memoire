@@ -76,4 +76,9 @@ public class MainFunctionnalitiesController {
     public ResponseEntity<List<PrestataireResponseDTO>> getPrestataires(){
         return ResponseEntity.ok(prestataireService.findAll());
     }
+
+    @GetMapping("/prestataireByService/{idservice}")
+    public ResponseEntity<?> getPrestataireByService(@PathVariable int idservice){
+        return ResponseEntity.ok(service.findPrestatairesByService(idservice));
+    }
 }

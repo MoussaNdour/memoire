@@ -13,7 +13,6 @@ public class AdministrateurResponseDTO implements Serializable {
 
     private String role;
 
-    private Integer codedaccess ;
 
 
     private boolean actif;
@@ -51,13 +50,6 @@ public class AdministrateurResponseDTO implements Serializable {
         this.role = role;
     }
 
-    public Integer getCodedaccess() {
-        return codedaccess;
-    }
-
-    public void setCodedaccess(Integer codedaccess) {
-        this.codedaccess = codedaccess;
-    }
 
     public boolean isActif() {
         return actif;

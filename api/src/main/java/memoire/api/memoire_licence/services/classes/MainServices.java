@@ -1,7 +1,9 @@
 package memoire.api.memoire_licence.services.classes;
 
+import memoire.api.memoire_licence.dto.response.PrestataireResponseDTO;
 import memoire.api.memoire_licence.entities.Prestataire;
 import memoire.api.memoire_licence.entities.Proposer;
+import memoire.api.memoire_licence.mappers.PrestataireResponseMapper;
 import memoire.api.memoire_licence.repositories.PrestataireRepository;
 import memoire.api.memoire_licence.repositories.ProposerRepository;
 import memoire.api.memoire_licence.repositories.ServiceRepository;
@@ -21,6 +23,9 @@ public class MainServices implements MainServicesInterface {
 
     @Autowired
     PrestataireRepository prestataireRepository;
+
+    @Autowired
+    PrestataireResponseMapper prestataireResponseMapper;
 
     @Autowired
     ProposerRepository proposerRepository;
@@ -64,5 +69,16 @@ public class MainServices implements MainServicesInterface {
         }
 
         return services ;
+    }
+
+    @Override
+    public List<PrestataireResponseDTO> findPrestatairesByService(int id) {
+        List<PrestataireResponseDTO> prestataires=new ArrayList<>();
+
+        for(Prestataire prestataire:proposerRepository.findPrestatairesByServiceId(id)){
+            prestataires.add(prestataireResponseMapper.toDTO(prestataire));
+        }
+
+        return prestataires;
     }
 }

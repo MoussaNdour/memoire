@@ -83,7 +83,7 @@ public class LoginAndRegisterController {
             UtilisateurDTO util=userMapper.toDTO(utilisateur);
             String token=jwtService.generateToken(utilisateur.getEmail());
             Map map=new HashMap();
-            map.put("Token:",token);
+            map.put("Token",token);
             map.put("utilisateur",util);
 
             return ResponseEntity.ok(map);

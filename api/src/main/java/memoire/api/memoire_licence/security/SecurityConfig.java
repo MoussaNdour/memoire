@@ -18,8 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity(
         prePostEnabled = true,
-        securedEnabled = true,    // pour @Secured
-        jsr250Enabled = true      // pour @RolesAllowed
+        securedEnabled = true,
+        jsr250Enabled = true
 )
 public class SecurityConfig {
 

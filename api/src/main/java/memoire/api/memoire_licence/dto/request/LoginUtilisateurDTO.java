@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 public class LoginUtilisateurDTO {
 
     @NotBlank(message = "L'email doit etre renseigner")
-    @Email
+    @Email(message = "Le mail est invalide")
     private String email;
 
     @NotNull(message = "Le mot de passe doit etre renseigner")

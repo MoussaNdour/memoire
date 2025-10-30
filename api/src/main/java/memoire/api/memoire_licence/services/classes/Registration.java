@@ -81,7 +81,6 @@ public class Registration implements RegistrationInterface {
 
             Administrateur admin=new Administrateur();
             admin.setUtilisateur(saved);
-            admin.setCodedaccess(2001);
             adminrepos.save(admin);
 
             return utilisateurMapper.toDTO(utilisateur);

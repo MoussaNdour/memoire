@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-10-23T17:12:32+0000",
+    date = "2025-10-30T16:24:23+0000",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -27,7 +27,6 @@ public class AdministrateurResponseMapperImpl implements AdministrateurResponseM
         administrateurResponseDTO.setRole( adminUtilisateurRole( admin ) );
         administrateurResponseDTO.setActif( adminUtilisateurActif( admin ) );
         administrateurResponseDTO.setIdadmin( admin.getIdadmin() );
-        administrateurResponseDTO.setCodedaccess( admin.getCodedaccess() );
 
         return administrateurResponseDTO;
     }

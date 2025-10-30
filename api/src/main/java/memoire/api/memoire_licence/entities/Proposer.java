@@ -21,7 +21,6 @@ public class Proposer {
     @JoinColumn(name="idprestataire",referencedColumnName = "idprestataire")
     Prestataire prestataire;
 
-
     @OneToOne
     @JoinColumn(name="idservice",referencedColumnName = "idservice")
     Service service;

@@ -27,9 +27,6 @@ public class Administrateur implements Serializable {
 
 
 
-    @Column(name="codedaccess")
-    private Integer codedaccess ;
-
 
     @OneToOne
     @JoinColumn(name="idutilisateur", referencedColumnName="idutilisateur")
@@ -51,12 +48,6 @@ public class Administrateur implements Serializable {
         return this.idadmin;
     }
 
-    public void setCodedaccess( Integer codedaccess ) {
-        this.codedaccess = codedaccess ;
-    }
-    public Integer getCodedaccess() {
-        return this.codedaccess;
-    }
 
     public Utilisateur getUtilisateur() {
         return this.utilisateur;
@@ -72,7 +63,6 @@ public class Administrateur implements Serializable {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Administrateur[");
 		sb.append(separator).append("idadmin=").append(idadmin);
-		sb.append(separator).append("codedaccess=").append(codedaccess);
 		sb.append("]");
 		return sb.toString();
 	}
